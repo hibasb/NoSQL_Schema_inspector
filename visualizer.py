@@ -5,7 +5,7 @@ def build_tree_figure(schema, collection_name="collection"):
     parents = [""]
     values = [100]
     colors = ["#1e3a5f"]
-    texts = ["📦 Racine"]
+    texts = ["Racine"]
 
     # Regrouper les champs par niveau
     top_fields = {}
