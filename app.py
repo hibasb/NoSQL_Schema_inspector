@@ -29,8 +29,11 @@ limit = st.sidebar.number_input("Limite de documents (0 = tous)", min_value=0, v
 
 analyser = st.sidebar.button("Analyser")
 
-# ── ANALYSE ───────────────────────────────────────────
 if analyser:
+    st.session_state["analyser_clicked"] = True
+
+# ── ANALYSE ───────────────────────────────────────────
+if st.session_state.get("analyser_clicked", False):
     with st.spinner("Connexion et analyse en cours..."):
 
         client = get_connection(uri)
