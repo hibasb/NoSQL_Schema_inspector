@@ -29,3 +29,11 @@ def get_documents(collection, limit=None):
         documents = list(collection.find({}, {"_id": 0}))
     print(f"{len(documents)} documents récupérés")
     return documents
+
+def get_collections_list(client, db_name):
+    try:
+        db = client[db_name]
+        return db.list_collection_names()
+    except Exception as e:
+        print(f"Erreur lors de la récupération des collections : {e}")
+        return []
