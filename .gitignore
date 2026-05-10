@@ -1,0 +1,19 @@
+# Credentials Firebase - NE JAMAIS PUSHER
+serviceAccountKey.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Anaconda / Virtual env
+envs/
+*.egg-info/
+
+# VSCode
+.vscode/
+
+# Data
+*.csv
+*.json.bak

@@ -1,165 +1,185 @@
 import streamlit as st
 import pandas as pd
 import json
-from connector import get_connection, get_collection, get_documents, get_collections_list
+from connectors import CONNECTORS
 from schema_inferrer import infer_schema
 from visualizer import build_tree_figure
 
-# ── CONFIG PAGE ──────────────────────────────────────
-st.set_page_config(
-    page_title="NoSQL Schema Inspector",
-    page_icon="images/logo.jpeg",
-    layout="wide"
+st.set_page_config(page_title="NoSQL Schema Inspector", page_icon="🔍", layout="wide")
+st.title("🔍 NoSQL Schema Inspector")
+st.caption("Inspection de schéma pour bases de données orientées document")
+
+# ── SIDEBAR ──────────────────────────────────────────
+st.sidebar.header("Configuration")
+
+db_type = st.sidebar.selectbox(
+    "Type de base de données",
+    list(CONNECTORS.keys())
 )
 
-col1, col2 = st.columns([0.1, 0.9])
-with col1:
-    st.image("images/search_icon.png", width=60)
-with col2:
-    st.title("NoSQL Schema Inspector")
-st.caption("Découverte automatique de la structure de vos collections MongoDB")
+st.sidebar.subheader("Paramètres de connexion")
 
-# ── SIDEBAR : CONNEXION ───────────────────────────────
-st.sidebar.header("Connexion MongoDB")
+conn_params = {}
 
-uri = st.sidebar.text_input("URI MongoDB", value="mongodb://localhost:27017")
-db_name = st.sidebar.text_input("Nom de la base", value="nosql_inspector_db")
-collection_name = st.sidebar.text_input("Nom de la collection (optionnel)", value="")
-limit = st.sidebar.number_input("Limite de documents (0 = tous)", min_value=0, value=0)
+if db_type == "MongoDB":
+    conn_params["uri"] = st.sidebar.text_input("URI", value="mongodb://localhost:27017")
+    db_name = st.sidebar.text_input("Nom de la base", value="nosql_test")
 
-analyser = st.sidebar.button("Analyser")
+elif db_type == "CouchDB":
+    conn_params["url"] = st.sidebar.text_input("URL", value="http://localhost:5984")
+    conn_params["username"] = st.sidebar.text_input("Utilisateur", value="admin")
+    conn_params["password"] = st.sidebar.text_input("Mot de passe", type="password")
+    db_name = ""  # CouchDB : pas de db_name, les bases sont les collections
 
-if analyser:
-    st.session_state["analyser_clicked"] = True
+elif db_type == "Firebase Firestore":
+    st.sidebar.info("Si GOOGLE_APPLICATION_CREDENTIALS est configuré, laisse vide.")
+    conn_params["credentials_path"] = st.sidebar.text_input(
+        "Chemin serviceAccountKey.json (optionnel)",
+        value=""
+    )
+    db_name = ""
 
-# ── ANALYSE ───────────────────────────────────────────
-if st.session_state.get("analyser_clicked", False):
-    with st.spinner("Connexion et analyse en cours..."):
+limit = st.sidebar.number_input("Limite de documents (0 = tous)", min_value=0, value=100)
 
-        client = get_connection(uri)
+# ── CONNEXION ─────────────────────────────────────────
+if st.sidebar.button("🔌 Connecter"):
+    connector = CONNECTORS[db_type]()
+    success = connector.connect(**conn_params)
 
-        if client is None:
-            st.error("Impossible de se connecter à MongoDB.")
-        else:
-            if collection_name.strip():
-                collections_to_analyze = [collection_name.strip()]
-            else:
-                collections_to_analyze = get_collections_list(client, db_name)
+    if not success:
+        st.sidebar.error(f"❌ Impossible de se connecter à {db_type}")
+    else:
+        st.sidebar.success(f"✅ Connecté à {db_type}")
+        collections = connector.get_collections(db_name)
+        st.session_state["connector"] = connector
+        st.session_state["collections"] = collections
+        st.session_state["db_name"] = db_name
+        st.session_state["db_type"] = db_type
+        st.session_state["limit"] = limit
 
-            if not collections_to_analyze:
-                st.warning("Aucune collection à analyser.")
-            else:
-                tabs = st.tabs(collections_to_analyze)
-                
-                for tab, coll_name in zip(tabs, collections_to_analyze):
-                    with tab:
-                        collection = get_collection(client, db_name, coll_name)
-                        if collection is None:
-                            st.error(f"Collection {coll_name} introuvable.")
-                            continue
-                            
-                        documents = get_documents(collection, limit=limit if limit > 0 else None)
+# ── SÉLECTION DES COLLECTIONS ─────────────────────────
+if "collections" in st.session_state and st.session_state["collections"]:
+    collections = st.session_state["collections"]
+    current_db_type = st.session_state["db_type"]
 
-                        if not documents:
-                            st.warning(f"Aucun document trouvé dans la collection {coll_name}.")
-                        else:
-                            schema = infer_schema(documents)
+    if current_db_type == "CouchDB":
+        label_collections = "Bases de données disponibles"
+        label_choisir = "Choisir les bases à analyser"
+    else:
+        label_collections = "Collections disponibles"
+        label_choisir = "Choisir les collections à analyser"
 
-                            # ── MÉTRIQUES ─────────────────────────────
-                            st.success(f"Analyse terminée sur {len(documents)} documents")
+    st.sidebar.subheader(label_collections)
+    selected = st.sidebar.multiselect(
+        label_choisir,
+        collections,
+        default=collections[:3]
+    )
 
-                            col1, col2, col3 = st.columns(3)
-                            col1.metric("Documents analysés", len(documents))
-                            col2.metric("Champs détectés", len(schema))
+    if st.sidebar.button("🔍 Analyser"):
+        st.session_state["selected_collections"] = selected
+        st.session_state["analyser_clicked"] = True
 
-                            champs_obligatoires = sum(
-                                1 for f in schema.values() if f["presence"] == 100.0
-                            )
-                            col3.metric("Champs présents partout", champs_obligatoires)
+# ── ANALYSE ET AFFICHAGE ──────────────────────────────
+if st.session_state.get("analyser_clicked") and "selected_collections" in st.session_state:
+    connector = st.session_state["connector"]
+    db_name = st.session_state["db_name"]
+    limit = st.session_state["limit"]
+    selected = st.session_state["selected_collections"]
 
-                            st.divider()
+    if not selected:
+        st.warning("Veuillez sélectionner au moins une collection.")
+    else:
+        tabs = st.tabs(selected)
 
-                            # ── TABLEAU PRINCIPAL ─────────────────────
-                            st.subheader("Schéma découvert")
+        for tab, coll_name in zip(tabs, selected):
+            with tab:
+                with st.spinner(f"Analyse de {coll_name}..."):
+                    docs = connector.get_documents(
+                        db_name, coll_name,
+                        limit=limit if limit > 0 else None
+                    )
 
-                            rows = []
-                            for field, info in sorted(schema.items()):
-                                types_str = ", ".join(
-                                    f"{t} ({n}x)" for t, n in info["types"].items()
-                                )
-                                rows.append({
-                                    "Champ": field,
-                                    "Type(s)": types_str,
-                                    "Présence (%)": info["presence"],
-                                    "Occurrences": info["count"]
-                                })
+                if not docs:
+                    st.warning(f"Aucun document trouvé dans '{coll_name}'.")
+                    continue
 
-                            df = pd.DataFrame(rows, columns=["Champ", "Type(s)", "Présence (%)", "Occurrences"])
+                schema = infer_schema(docs)
 
-                            # Colorier selon la présence
-                            def color_presence(val):
-                                if val == 100.0:
-                                    return "background-color: #166534; color: white"
-                                elif val >= 50:
-                                    return "background-color: #854d0e; color: white"
-                                else:
-                                    return "background-color: #7f1d1d; color: white"
+                if not schema:
+                    st.warning(f"Schéma vide pour '{coll_name}'.")
+                    continue
 
-                            # Calcul de la hauteur dynamique (environ 35px par ligne + 40px d'entête)
-                            # Limité à 400px pour éviter que le tableau soit trop long
-                            dynamic_height = min(400, max(100, len(df) * 35 + 40))
+                # ── MÉTRIQUES ─────────────────────────────────
+                col1, col2, col3 = st.columns(3)
+                col1.metric("Documents analysés", len(docs))
+                col2.metric("Champs détectés", len(schema))
+                col3.metric("Champs à 100%", sum(
+                    1 for f in schema.values() if f["presence"] == 100.0
+                ))
 
-                            if not df.empty:
-                                styled_df = df.style.map(
-                                    color_presence, subset=["Présence (%)"]
-                                )
-                                st.dataframe(styled_df, use_container_width=True, height=dynamic_height)
-                            else:
-                                st.info("Aucun champ détecté dans ces documents (ils sont probablement vides).")
-                                st.dataframe(df, use_container_width=True, height=dynamic_height)
+                st.divider()
 
-                            st.divider()
+                # ── TABLEAU ───────────────────────────────────
+                st.subheader("Schéma découvert")
+                rows = [
+                    {
+                        "Champ": field,
+                        "Type(s)": ", ".join(f"{t}({n}x)" for t, n in info["types"].items()),
+                        "Présence (%)": info["presence"],
+                        "Occurrences": info["count"]
+                    }
+                    for field, info in sorted(schema.items())
+                ]
+                df = pd.DataFrame(rows)
 
-                            # ── VISUALISATION ARBRE ───────────────────────────────
-                            st.subheader("Schéma visuel interactif")
+                def color_presence(val):
+                    if val == 100.0:
+                        return "background-color: #166534; color: white"
+                    elif val >= 50:
+                        return "background-color: #854d0e; color: white"
+                    else:
+                        return "background-color: #7f1d1d; color: white"
 
-                            st.markdown("""*Guide des couleurs :*
-                            🟢 Présent dans 100% des documents &nbsp;|&nbsp;
-                            🔵 Présent dans +50% &nbsp;|&nbsp;
-                            ⚫ Rare (-50%) &nbsp;|&nbsp;
-                            🟠 Type mixte (plusieurs types détectés)
-                            """)
+                dynamic_height = min(400, max(100, len(df) * 35 + 40))
+                styled_df = df.style.map(color_presence, subset=["Présence (%)"])
+                st.dataframe(styled_df, use_container_width=True, height=dynamic_height)
 
-                            fig = build_tree_figure(schema, collection_name=coll_name)
-                            st.plotly_chart(fig, use_container_width=True)
+                st.divider()
 
-                            # ── EXPORT ────────────────────────────────
-                            st.subheader("Exporter le schéma")
+                # ── VISUALISATION ─────────────────────────────
+                st.subheader("Schéma visuel")
+                st.markdown("""*Guide des couleurs :*
+                🟢 100% des documents &nbsp;|&nbsp;
+                🔵 +50% &nbsp;|&nbsp;
+                ⚫ Rare (-50%) &nbsp;|&nbsp;
+                🟠 Type mixte
+                """)
+                fig = build_tree_figure(schema, collection_name=coll_name)
+                st.plotly_chart(fig, use_container_width=True, key=f"chart_{coll_name}")
 
-                            col_a, col_b = st.columns(2)
+                st.divider()
 
-                            # Export JSON
-                            with col_a:
-                                json_data = json.dumps(schema, indent=2, ensure_ascii=False)
-                                st.download_button(
-                                    label="Télécharger en JSON",
-                                    data=json_data,
-                                    file_name=f"schema_{coll_name}.json",
-                                    mime="application/json",
-                                    key=f"json_{coll_name}"
-                                )
+                # ── EXPORT ────────────────────────────────────
+                st.subheader("Exporter")
+                col_a, col_b = st.columns(2)
+                with col_a:
+                    st.download_button(
+                        "📥 Télécharger JSON",
+                        json.dumps(schema, indent=2, ensure_ascii=False),
+                        file_name=f"schema_{coll_name}.json",
+                        mime="application/json",
+                        key=f"json_{coll_name}"
+                    )
+                with col_b:
+                    st.download_button(
+                        "📥 Télécharger CSV",
+                        df.to_csv(index=False).encode("utf-8"),
+                        file_name=f"schema_{coll_name}.csv",
+                        mime="text/csv",
+                        key=f"csv_{coll_name}"
+                    )
 
-                            # Export CSV
-                            with col_b:
-                                csv_data = df.to_csv(index=False).encode("utf-8")
-                                st.download_button(
-                                    label="Télécharger en CSV",
-                                    data=csv_data,
-                                    file_name=f"schema_{coll_name}.csv",
-                                    mime="text/csv",
-                                    key=f"csv_{coll_name}"
-                                )
-
-                            # ── APERÇU DOCUMENTS BRUTS ────────────────
-                            with st.expander("Voir les documents bruts"):
-                                st.json(documents[:5])
+                # ── DOCUMENTS BRUTS ───────────────────────────
+                with st.expander("👁️ Voir les documents bruts"):
+                    st.json(docs[:5])
