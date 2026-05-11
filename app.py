@@ -102,6 +102,9 @@ if "collections" in st.session_state and st.session_state["collections"]:
     if st.sidebar.button("Analyser"):
         st.session_state["selected_collections"] = selected
         st.session_state["analyser_clicked"] = True
+        # Vider le cache de tous les documents pour forcer un re-fetch
+        for _c in selected:
+            st.session_state.pop(f"docs_{_c}", None)
 
 # ── ANALYSE ET AFFICHAGE ──────────────────────────────
 if st.session_state.get("analyser_clicked") and "selected_collections" in st.session_state:
@@ -117,11 +120,17 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
 
         for tab, coll_name in zip(tabs, selected):
             with tab:
-                with st.spinner(f"Analyse de {coll_name}..."):
-                    docs = connector.get_documents(
-                        db_name, coll_name,
-                        limit=limit if limit > 0 else None
-                    )
+                # ── FETCH DOCS (avec cache par collection) ──────────────
+                _cache_key = f"docs_{coll_name}"
+                if _cache_key not in st.session_state:
+                    with st.spinner(f"Chargement des données de {coll_name}..."):
+                        _fresh = connector.get_documents(
+                            db_name, coll_name,
+                            limit=limit if limit > 0 else None
+                        )
+                    st.session_state[_cache_key] = _fresh
+
+                docs = st.session_state[_cache_key]
 
                 if not docs:
                     st.warning(f"Aucun document trouvé dans '{coll_name}'.")
@@ -132,6 +141,26 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                 if not schema:
                     st.warning(f"Schéma vide pour '{coll_name}'.")
                     continue
+
+                # ── EN-TÊTE : titre + bouton Actualiser (top-right) ───────
+                col_title, col_btn = st.columns([8, 2])
+                with col_title:
+                    st.markdown(
+                        f"<span style='font-size:13px;color:#6b7280'>"
+                        f"Collection : <b style='color:#1e3a5f'>{coll_name}</b></span>",
+                        unsafe_allow_html=True
+                    )
+                with col_btn:
+                    if st.button(
+                        "\u21bb  Actualiser",
+                        key=f"reload_{coll_name}",
+                        help="Re-récupérer les données depuis la base de données",
+                        use_container_width=True
+                    ):
+                        # Supprimer le cache de CETTE collection uniquement
+                        st.session_state.pop(f"docs_{coll_name}", None)
+
+                st.divider()
 
                 # ── MÉTRIQUES GLOBALES ────────────────────────
                 col1, col2, col3 = st.columns(3)
@@ -354,4 +383,4 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                             st.warning(
                                 "📦 Export PDF indisponible : "
                                 "installez `reportlab` (`pip install reportlab`)"
-                            )
+                            )
