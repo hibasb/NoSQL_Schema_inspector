@@ -1,3 +1,5 @@
+import datetime
+
 def get_type(value):
     if isinstance(value, bool):
         return "boolean"
@@ -26,13 +28,22 @@ def analyze_document(doc, schema=None, prefix=""):
         type_found = get_type(value)
 
         if full_key not in schema:
-            schema[full_key] = {"types": {}, "count": 0}
+            schema[full_key] = {"types": {}, "count": 0, "samples": []}
 
         schema[full_key]["count"] += 1
 
         if type_found not in schema[full_key]["types"]:
             schema[full_key]["types"][type_found] = 0
         schema[full_key]["types"][type_found] += 1
+
+        # Collecter des exemples de valeurs (max 3, primitives uniquement)
+        if value is not None and not isinstance(value, (dict, list)):
+            if len(schema[full_key]["samples"]) < 3:
+                # Convertir les types non-JSON (datetime, ObjectId...) en string
+                if isinstance(value, (str, int, float, bool)):
+                    schema[full_key]["samples"].append(value)
+                else:
+                    schema[full_key]["samples"].append(str(value))
 
         # Si c'est un objet imbriqué => on descend récursivement
         if isinstance(value, dict):
@@ -60,7 +71,8 @@ def infer_schema(documents):
         result[field] = {
             "types": info["types"],
             "count": info["count"],
-            "presence": round((info["count"] / total) * 100, 1)
+            "presence": round((info["count"] / total) * 100, 1),
+            "samples": info.get("samples", [])  # valeurs d'exemple pour l'audit
         }
 
     return result

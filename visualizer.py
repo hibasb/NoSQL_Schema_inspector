@@ -107,3 +107,67 @@ def build_tree_figure(schema, collection_name="collection"):
     )
 
     return fig
+
+
+def build_security_gauge(score: int) -> go.Figure:
+    """
+    Jauge arc Plotly pour le score de sécurité (0–100).
+    Rouge → Orange → Vert selon le score.
+    """
+    if score >= 70:
+        bar_color = "#10b981"   # vert
+        label     = "BON"
+    elif score >= 40:
+        bar_color = "#f59e0b"   # orange
+        label     = "MOYEN"
+    else:
+        bar_color = "#ef4444"   # rouge
+        label     = "DANGER"
+
+    fig = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value=score,
+        domain={"x": [0, 1], "y": [0, 1]},
+        title={
+            "text": (
+                f"Score de Sécurité<br>"
+                f"<span style='font-size:0.85em;color:{bar_color}'>{label}</span>"
+            ),
+            "font": {"size": 18, "color": "white"}
+        },
+        number={
+            "suffix": " / 100",
+            "font": {"size": 42, "color": bar_color}
+        },
+        gauge={
+            "axis": {
+                "range": [0, 100],
+                "tickwidth": 1,
+                "tickcolor": "#9ca3af",
+                "tickfont": {"color": "#9ca3af"}
+            },
+            "bar": {"color": bar_color, "thickness": 0.25},
+            "bgcolor": "#1f2937",
+            "borderwidth": 2,
+            "bordercolor": "#374151",
+            "steps": [
+                {"range": [0,  40], "color": "#450a0a"},
+                {"range": [40, 70], "color": "#431407"},
+                {"range": [70, 100], "color": "#052e16"},
+            ],
+            "threshold": {
+                "line": {"color": bar_color, "width": 4},
+                "thickness": 0.75,
+                "value": score
+            }
+        }
+    ))
+
+    fig.update_layout(
+        paper_bgcolor="#111827",
+        font={"color": "white"},
+        height=280,
+        margin=dict(t=60, b=10, l=30, r=30)
+    )
+
+    return fig
