@@ -5,8 +5,8 @@ from connectors import CONNECTORS
 from schema_inferrer import infer_schema
 from visualizer import build_tree_figure
 
-st.set_page_config(page_title="NoSQL Schema Inspector", page_icon="🔍", layout="wide")
-st.title("🔍 NoSQL Schema Inspector")
+st.set_page_config(page_title="NoSQL Schema Inspector", layout="wide")
+st.title("NoSQL Schema Inspector")
 st.caption("Inspection de schéma pour bases de données orientées document")
 
 # ── SIDEBAR ──────────────────────────────────────────
@@ -42,14 +42,14 @@ elif db_type == "Firebase Firestore":
 limit = st.sidebar.number_input("Limite de documents (0 = tous)", min_value=0, value=100)
 
 # ── CONNEXION ─────────────────────────────────────────
-if st.sidebar.button("🔌 Connecter"):
+if st.sidebar.button("Connecter"):
     connector = CONNECTORS[db_type]()
     success = connector.connect(**conn_params)
 
     if not success:
-        st.sidebar.error(f"❌ Impossible de se connecter à {db_type}")
+        st.sidebar.error(f"Impossible de se connecter à {db_type}")
     else:
-        st.sidebar.success(f"✅ Connecté à {db_type}")
+        st.sidebar.success(f"Connecté à {db_type}")
         collections = connector.get_collections(db_name)
         st.session_state["connector"] = connector
         st.session_state["collections"] = collections
@@ -76,7 +76,7 @@ if "collections" in st.session_state and st.session_state["collections"]:
         default=collections[:3]
     )
 
-    if st.sidebar.button("🔍 Analyser"):
+    if st.sidebar.button("Analyser"):
         st.session_state["selected_collections"] = selected
         st.session_state["analyser_clicked"] = True
 
@@ -150,10 +150,10 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                 # ── VISUALISATION ─────────────────────────────
                 st.subheader("Schéma visuel")
                 st.markdown("""*Guide des couleurs :*
-                🟢 100% des documents &nbsp;|&nbsp;
-                🔵 +50% &nbsp;|&nbsp;
-                ⚫ Rare (-50%) &nbsp;|&nbsp;
-                🟠 Type mixte
+                **Vert** = 100% des documents &nbsp;|&nbsp;
+                **Bleu** = +50% &nbsp;|&nbsp;
+                **Gris** = Rare (-50%) &nbsp;|&nbsp;
+                **Orange** = Type mixte
                 """)
                 fig = build_tree_figure(schema, collection_name=coll_name)
                 st.plotly_chart(fig, use_container_width=True, key=f"chart_{coll_name}")
@@ -165,7 +165,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                 col_a, col_b = st.columns(2)
                 with col_a:
                     st.download_button(
-                        "📥 Télécharger JSON",
+                        "Télécharger JSON",
                         json.dumps(schema, indent=2, ensure_ascii=False),
                         file_name=f"schema_{coll_name}.json",
                         mime="application/json",
@@ -173,7 +173,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                     )
                 with col_b:
                     st.download_button(
-                        "📥 Télécharger CSV",
+                        "Télécharger CSV",
                         df.to_csv(index=False).encode("utf-8"),
                         file_name=f"schema_{coll_name}.csv",
                         mime="text/csv",
@@ -181,5 +181,5 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                     )
 
                 # ── DOCUMENTS BRUTS ───────────────────────────
-                with st.expander("👁️ Voir les documents bruts"):
+                with st.expander("Voir les documents bruts"):
                     st.json(docs[:5])

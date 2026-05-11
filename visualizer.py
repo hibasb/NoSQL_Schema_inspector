@@ -1,7 +1,7 @@
 import plotly.graph_objects as go
 
 def build_tree_figure(schema, collection_name="collection"):
-    labels = [collection_name]
+    labels = [f"<b>{collection_name}</b>"]
     parents = [""]
     values = [100]
     colors = ["#1e3a5f"]
@@ -35,15 +35,15 @@ def build_tree_figure(schema, collection_name="collection"):
     def get_icon(types):
         t = list(types.keys())[0] if types else "unknown"
         icons = {
-            "string": "📝",
-            "integer": "🔢",
-            "float": "🔢",
-            "boolean": "☑️",
-            "object": "📁",
-            "array": "📋",
-            "null": "∅"
+            "string": "[str]",
+            "integer": "[int]",
+            "float": "[float]",
+            "boolean": "[bool]",
+            "object": "[obj]",
+            "array": "[arr]",
+            "null": "[null]"
         }
-        return icons.get(t, "•")
+        return icons.get(t, "")
 
     # Ajouter les champs de premier niveau
     for field, info in sorted(top_fields.items()):
@@ -51,13 +51,13 @@ def build_tree_figure(schema, collection_name="collection"):
         types = info["types"]
         icon = get_icon(types)
         types_str = ", ".join(types.keys())
-        label = f"{icon} {field}"
+        label = f"<b>{field}</b>"
 
         labels.append(label)
-        parents.append(collection_name)
+        parents.append(f"<b>{collection_name}</b>")
         values.append(max(presence, 10))
         colors.append(get_color(presence, types))
-        texts.append(f"{types_str} | {presence}%")
+        texts.append(f"{icon}  {types_str} | {presence}%")
 
     # Ajouter les champs imbriqués
     for field, info in sorted(schema.items()):
@@ -71,19 +71,17 @@ def build_tree_figure(schema, collection_name="collection"):
         types_str = ", ".join(types.keys())
 
         parent_field = ".".join(parts[:-1])
-        parent_info = schema.get(parent_field, {})
-        parent_icon = get_icon(parent_info.get("types", {"object": 1}))
-        parent_label = f"{parent_icon} {parent_field}" if parent_field in top_fields else f"📁 {parts[-2]}"
+        parent_label = f"<b>{parent_field}</b>" if parent_field in top_fields else f"<b>{parts[-2]}</b>"
 
-        label = f"{icon} {parts[-1]}"
+        label = f"<b>{parts[-1]}</b>"
         if label in labels:
-            label = f"{icon} {field}"
+            label = f"<b>{field}</b>"
 
         labels.append(label)
         parents.append(parent_label)
         values.append(max(presence, 10))
         colors.append(get_color(presence, types))
-        texts.append(f"{types_str} | {presence}%")
+        texts.append(f"{icon}  {types_str} | {presence}%")
 
     fig = go.Figure(go.Treemap(
         labels=labels,
@@ -91,6 +89,7 @@ def build_tree_figure(schema, collection_name="collection"):
         values=values,
         text=texts,
         textinfo="label+text",
+        textposition="middle center",
         hovertemplate="<b>%{label}</b><br>%{text}<extra></extra>",
         marker=dict(
             colors=colors,
@@ -103,8 +102,8 @@ def build_tree_figure(schema, collection_name="collection"):
     fig.update_layout(
         margin=dict(t=30, l=10, r=10, b=10),
         paper_bgcolor="#111827",
-        font=dict(color="white", size=13),
-        height=550
+        font=dict(color="white", size=15, family="monospace"),
+        height=600
     )
 
     return fig
