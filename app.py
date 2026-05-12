@@ -10,6 +10,7 @@ from exporter import (
     export_security_report_csv,
     export_security_report_pdf
 )
+from chatbot import render_chatbot
 
 
 class SafeJSONEncoder(json.JSONEncoder):
@@ -717,3 +718,6 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                 "Export PDF indisponible : "
                                 "installez reportlab (pip install reportlab)"
                             )
+
+# ── FLOATING CHATBOT (always rendered last) ───────────────────────────────────
+render_chatbot()
