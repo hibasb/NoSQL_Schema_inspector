@@ -17,7 +17,7 @@
 
 1. Clonez ce dépôt :
    ```bash
-   git clone https://github.com/votre-nom/NoSQL_Schema_inspector.git
+   git clone https://github.com/hibasb/NoSQL_Schema_inspector.git
    cd NoSQL_Schema_inspector
    ```
 
