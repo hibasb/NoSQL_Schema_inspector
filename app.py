@@ -29,7 +29,13 @@ class SafeJSONEncoder(json.JSONEncoder):
             return obj.decode("utf-8", errors="replace")
         return str(obj)
 
-st.set_page_config(page_title="NoSQL Schema Inspector", layout="wide")
+from PIL import Image as _PILImage
+_favicon = _PILImage.open("images/favicon.png")
+st.set_page_config(
+    page_title="NoSQL Schema Inspector",
+    page_icon=_favicon,
+    layout="wide"
+)
 
 # ══════════════════════════════════════════════════════
 #  PREMIUM CSS — animations + glassmorphism + SaaS style

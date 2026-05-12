@@ -96,11 +96,13 @@ def render_chatbot():
         display: flex; align-items: center; gap: 10px; flex-shrink: 0;
       }}
       .nsi-avatar {{
-        width:34px; height:34px; border-radius:50%;
+        width:36px; height:36px; border-radius:50%;
         background: linear-gradient(135deg,#6366f1,#a855f7);
         display:flex; align-items:center; justify-content:center;
-        font-size:16px; flex-shrink:0;
+        flex-shrink:0;
+        box-shadow: 0 0 10px rgba(139,92,246,.5);
       }}
+      .nsi-avatar svg {{ display:block; }}
       .nsi-hinfo {{ flex:1; }}
       .nsi-htitle {{ font-size:14px; font-weight:700; color:#f1f5f9; margin:0; }}
       .nsi-hsub   {{ font-size:11px; color:#818cf8; margin:0; }}
@@ -214,7 +216,21 @@ def render_chatbot():
 
     <div id="nsi-chatbot-panel" class="nsi-hidden">
       <div id="nsi-chatbot-header">
-        <div class="nsi-avatar">🤖</div>
+        <div class="nsi-avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+               stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Head -->
+            <rect x="4" y="7" width="16" height="12" rx="3" ry="3"/>
+            <!-- Antenna -->
+            <line x1="12" y1="7" x2="12" y2="3"/>
+            <circle cx="12" cy="2.5" r="1" fill="white" stroke="none"/>
+            <!-- Eyes -->
+            <circle cx="9" cy="12" r="1.2" fill="white" stroke="none"/>
+            <circle cx="15" cy="12" r="1.2" fill="white" stroke="none"/>
+            <!-- Mouth -->
+            <path d="M9 15.5 Q12 17.5 15 15.5" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
         <div class="nsi-hinfo">
           <div class="nsi-htitle">NoSQL Inspector AI</div>
           <div class="nsi-hsub">Powered by Groq · LLaMA 3</div>
