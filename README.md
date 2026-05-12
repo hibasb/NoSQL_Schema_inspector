@@ -27,7 +27,8 @@
    source venv/bin/activate  # Sous Windows : venv\Scripts\activate
    pip install -r requirements.txt
    ```
-   *(Assurez-vous d'avoir installé les packages comme `streamlit`, `pymongo`, `firebase-admin`, `requests`, `plotly`, `reportlab`, `python-dotenv`)*
+   *(Assurez-vous d'avoir installé les packages comme `streamlit`, `pymongo`, `firebase-admin`, `requests`, `plotly`, `reportlab`,
+   `groq`, `python-dotenv`)*
 
 3. Configuration :
    Copiez le fichier d'exemple des variables d'environnement et ajoutez votre clé API Groq pour activer le chatbot IA :
