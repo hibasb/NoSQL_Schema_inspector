@@ -45,6 +45,13 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+/* Load country flag polyfill font for Windows/Chromium users */
+@font-face {
+  font-family: 'Twemoji Country Flags';
+  src: url('https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1/dist/TwemojiCountryFlags.woff2') format('woff2');
+  unicode-range: U+1F1E6-1F1FF; /* Range for country flag symbols */
+}
+
 /* ─── Keyframes ─────────────────────────────────── */
 @keyframes fadeInUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }
@@ -55,7 +62,14 @@ st.markdown("""
 @keyframes glow       { 0%,100%{ text-shadow:0 0 8px rgba(139,92,246,.6); } 50%{ text-shadow:0 0 20px rgba(139,92,246,1),0 0 40px rgba(99,102,241,.5); } }
 
 /* ─── Global ─────────────────────────────────────── */
-html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
+html, body, select, option, [data-baseweb="select"] * {
+  font-family: 'Twemoji Country Flags', 'Inter', sans-serif !important;
+}
+
+/* Hide Streamlit default header and footer */
+[data-testid="stHeader"] { display: none !important; }
+footer { display: none !important; }
+[data-testid="stSidebarUserContent"] { padding-top: 0px !important; margin-top: -30px !important; }
 
 .stApp {
     background: linear-gradient(135deg, #0f0c29 0%, #1a1040 30%, #0f172a 60%, #0c1526 100%) !important;
@@ -65,9 +79,10 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 }
 
 /* ─── Main content animation ─────────────────────── */
-.main .block-container {
+.main .block-container, [data-testid="stAppViewBlockContainer"] {
     animation: fadeInUp 0.6s ease both;
-    padding-top: 0 !important;
+    padding-top: 0px !important;
+    margin-top: -30px !important;
 }
 
 /* ─── Sidebar glassmorphism ───────────────────────── */
@@ -304,8 +319,9 @@ if "lang" not in st.session_state:
 # ── HEADER ANIMÉ ────────────────────────────────────
 st.markdown(f"""
 <div style="
-    padding: 32px 0 22px 0;
-    margin-bottom: 24px;
+    padding: 0px 0 15px 0;
+    margin-top: 0px;
+    margin-bottom: 20px;
     border-bottom: 1px solid rgba(139,92,246,0.25);
     animation: fadeInUp 0.5s ease both;
 ">
@@ -336,14 +352,14 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ── SIDEBAR ──────────────────────────────────────────
-st.sidebar.markdown(f"### Language / Langue")
-selected_lang = st.sidebar.selectbox(
+st.sidebar.markdown(f"### ")
+selected_lang_display = st.sidebar.selectbox(
     "Select Language / Choisir la langue",
-    ["English", "Français"],
-    index=0 if st.session_state["lang"] == "English" else 1,
+    ["🇺🇸 US", "🇫🇷 FR"],
+    index=0 if st.session_state.get("lang", "English") == "English" else 1,
     label_visibility="collapsed"
 )
-st.session_state["lang"] = selected_lang
+st.session_state["lang"] = "English" if selected_lang_display == "🇺🇸 US" else "Français"
 
 st.sidebar.header(get_text("config_header"))
 
