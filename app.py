@@ -38,6 +38,19 @@ st.set_page_config(
     layout="wide"
 )
 
+# ── INITIALISATION ET SÉLECTION DE LA LANGUE ────────
+if "lang" not in st.session_state:
+    st.session_state["lang"] = "English"
+
+selected_lang_display = st.sidebar.selectbox(
+    "Select Language / Choisir la langue",
+    ["🇺🇸 US", "🇫🇷 FR"],
+    index=0 if st.session_state.get("lang", "English") == "English" else 1,
+    key="global_lang_selector",
+    label_visibility="collapsed"
+)
+st.session_state["lang"] = "English" if selected_lang_display == "🇺🇸 US" else "Français"
+
 # ══════════════════════════════════════════════════════
 #  PREMIUM CSS — animations + glassmorphism + SaaS style
 # ══════════════════════════════════════════════════════
@@ -66,9 +79,17 @@ html, body, select, option, [data-baseweb="select"] * {
   font-family: 'Twemoji Country Flags', 'Inter', sans-serif !important;
 }
 
-/* Hide Streamlit default header and footer */
-[data-testid="stHeader"] { display: none !important; }
+/* Hide Deploy button, main menu icon, and footer, but keep transparent header so sidebar collapse/expand works */
+.stDeployButton { display: none !important; }
+#MainMenu { display: none !important; }
 footer { display: none !important; }
+[data-testid="stHeader"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
 [data-testid="stSidebarUserContent"] { padding-top: 0px !important; margin-top: -30px !important; }
 
 .stApp {
@@ -352,14 +373,6 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ── SIDEBAR ──────────────────────────────────────────
-st.sidebar.markdown(f"### ")
-selected_lang_display = st.sidebar.selectbox(
-    "Select Language / Choisir la langue",
-    ["🇺🇸 US", "🇫🇷 FR"],
-    index=0 if st.session_state.get("lang", "English") == "English" else 1,
-    label_visibility="collapsed"
-)
-st.session_state["lang"] = "English" if selected_lang_display == "🇺🇸 US" else "Français"
 
 st.sidebar.header(get_text("config_header"))
 
@@ -375,7 +388,7 @@ conn_params = {}
 
 if db_type == "MongoDB":
     conn_params["uri"] = st.sidebar.text_input("URI", value="mongodb://localhost:27017")
-    db_name = st.sidebar.text_input("Nom de la base", value="nosql_test")
+    db_name = st.sidebar.text_input(get_text("mongo_db_name"), value="nosql_test")
 
 elif db_type == "CouchDB":
     conn_params["url"] = st.sidebar.text_input("URL", value="http://localhost:5984")
@@ -651,7 +664,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                     color:white;
                                     font-size: 15px;
                                 ">
-                                {icon} <b>{sev}</b> — {get_text('finding_count').format(count=count)}
+                                {icon} <b>{sev}</b> - {get_text('finding_count').format(count=count)}
                                 </div>
                                 """,
                                 unsafe_allow_html=True
@@ -697,7 +710,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                 <div style="font-size:14px;font-weight:bold;margin-bottom:4px">
                                     {icon} [{f['severity']}] &nbsp;
                                     <code style="color:{fg}">{f['rule']}</code>
-                                    &nbsp;—&nbsp; {get_text('label_field')} : <b>{f['field']}</b>
+                                    &nbsp;-&nbsp; {get_text('label_field')} : <b>{f['field']}</b>
                                 </div>
                                 <div style="font-size:13px;margin-bottom:4px">{f['message']}</div>
                                 <div style="font-size:12px;opacity:0.8">

@@ -12,7 +12,7 @@ TRANSLATIONS = {
         "couch_pass": "Password",
         "fb_info": "If GOOGLE_APPLICATION_CREDENTIALS is configured, leave everything empty and click Connect directly.",
         "fb_cred_path": "Path to serviceAccountKey.json (optional)",
-        "fb_manual_label": "*— or fill in the fields manually —*",
+        "fb_manual_label": "*- or fill in the fields manually -*",
         "fb_project_id": "Project ID",
         "fb_client_email": "Client Email",
         "fb_private_key": "Private Key",
@@ -64,7 +64,8 @@ TRANSLATIONS = {
         "security_score_title": "Security Score",
         "score_good": "GOOD",
         "score_medium": "MEDIUM",
-        "score_danger": "DANGER"
+        "score_danger": "DANGER",
+        "mongo_db_name": "Database name"
     },
     "Français": {
         "app_title": "NoSQL Schema Inspector",
@@ -76,7 +77,7 @@ TRANSLATIONS = {
         "couch_pass": "Mot de passe",
         "fb_info": "Si GOOGLE_APPLICATION_CREDENTIALS est configuré, laisse tout vide et clique directement sur Connecter.",
         "fb_cred_path": "Chemin serviceAccountKey.json (optionnel)",
-        "fb_manual_label": "*— ou renseigne les champs manuellement —*",
+        "fb_manual_label": "*- ou renseigne les champs manuellement -*",
         "fb_project_id": "Project ID",
         "fb_client_email": "Client Email",
         "fb_private_key": "Private Key",
@@ -128,7 +129,8 @@ TRANSLATIONS = {
         "security_score_title": "Score de Sécurité",
         "score_good": "BON",
         "score_medium": "MOYEN",
-        "score_danger": "DANGER"
+        "score_danger": "DANGER",
+        "mongo_db_name": "Nom de la base"
     }
 }
 

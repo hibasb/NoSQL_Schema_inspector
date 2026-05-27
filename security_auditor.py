@@ -254,7 +254,7 @@ def _rule_type_juggling(docs, schema, lang="English"):
                 "severity": "MEDIUM",
                 "message": _msg("TYPE_JUGGLING", lang, field=field, types=", ".join(types.keys())),
                 "affected_docs": info.get("count", 0),
-                "sample": "—"
+                "sample": "-"
             })
     return findings
 
@@ -283,11 +283,11 @@ def _rule_missing_timestamps(docs, schema, lang="English"):
     fields_norm = {_normalize(f) for f in schema}
     if not any(f in TIMESTAMP_FIELDS for f in fields_norm):
         return [{
-            "field": "—", "rule": "MISSING_TIMESTAMPS",
+            "field": "-", "rule": "MISSING_TIMESTAMPS",
             "severity": "INFO",
             "message": _msg("MISSING_TIMESTAMPS", lang),
             "affected_docs": len(docs),
-            "sample": "—"
+            "sample": "-"
         }]
     return []
 

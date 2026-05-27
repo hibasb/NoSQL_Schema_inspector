@@ -1,4 +1,4 @@
-# NoSQL Schema Inspector — Dépendances 
+# NoSQL Schema Inspector - Dépendances 
 # Installez tout avec : pip install -r requirements.txt
 
 # Interface web

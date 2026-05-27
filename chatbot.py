@@ -1,5 +1,5 @@
 """
-chatbot.py — Floating AI assistant widget (Groq-powered) for Streamlit.
+chatbot.py - Floating AI assistant widget (Groq-powered) for Streamlit.
 Uses st.components.v1.html to inject the widget into the parent page DOM,
 because st.markdown silently strips <script> tags.
 Call render_chatbot() once at the bottom of app.py.

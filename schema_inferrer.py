@@ -80,7 +80,7 @@ def infer_schema(documents):
 
 def display_schema(schema):
     print(f"\n{'='*55}")
-    print(f"  SCHÉMA INFÉRÉ — {len(schema)} champs détectés")
+    print(f"  SCHÉMA INFÉRÉ - {len(schema)} champs détectés")
     print(f"{'='*55}")
     print(f"{'Champ':<30} {'Type(s)':<15} {'Présence'}")
     print(f"{'-'*55}")
