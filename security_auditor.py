@@ -106,7 +106,40 @@ def _get_values(docs: list, field_path: str) -> list:
 
 # ── RÈGLES DE DÉTECTION ──────────────────────────────────────
 
-def _rule_password(docs, schema):
+AUDIT_MESSAGES = {
+    "English": {
+        "PLAINTEXT_PASSWORD": "The field '{field}' contains plaintext passwords (not hashed).",
+        "WEAK_HASH_MD5": "The field '{field}' uses MD5, a deprecated algorithm vulnerable to rainbow tables.",
+        "PII_EXPOSED": "The field '{field}' contains personally identifiable information (PII) stored in plaintext.",
+        "TOKEN_EXPOSED": "The field '{field}' contains plaintext tokens/API keys.",
+        "NOSQL_INJECTION_RISK": "The field '{field}' contains NoSQL operators in its values (injection risk).",
+        "TYPE_JUGGLING": "The sensitive field '{field}' has mixed types ({types}), type juggling risk.",
+        "CARD_DATA_EXPOSED": "The field '{field}' potentially exposes credit card data (PCI-DSS violation).",
+        "MISSING_TIMESTAMPS": "The collection lacks traceability fields (createdAt/updatedAt). Audit trail is impossible.",
+        "ROLE_FIELD_EXPOSED": "The field '{field}' exposes roles/privileges in plaintext without protection.",
+        "UNSTRUCTURED_PERMISSIONS": "The field '{field}' stores permissions as an unstructured string (bypass risk)."
+    },
+    "Français": {
+        "PLAINTEXT_PASSWORD": "Le champ '{field}' contient des mots de passe en clair (non hachés).",
+        "WEAK_HASH_MD5": "Le champ '{field}' utilise MD5, un algorithme déprécié et vulnérable aux rainbow tables.",
+        "PII_EXPOSED": "Le champ '{field}' contient des données personnelles (PII) stockées en clair.",
+        "TOKEN_EXPOSED": "Le champ '{field}' contient des tokens/clés API en clair.",
+        "NOSQL_INJECTION_RISK": "Le champ '{field}' contient des opérateurs NoSQL dans ses valeurs (risque d'injection).",
+        "TYPE_JUGGLING": "Le champ sensible '{field}' a des types mixtes ({types}), risque de type juggling.",
+        "CARD_DATA_EXPOSED": "Le champ '{field}' expose potentiellement des données bancaires (violation PCI-DSS).",
+        "MISSING_TIMESTAMPS": "La collection n'a pas de champs de traçabilité (createdAt/updatedAt). L'audit trail est impossible.",
+        "ROLE_FIELD_EXPOSED": "Le champ '{field}' expose les rôles/privilèges en clair sans protection.",
+        "UNSTRUCTURED_PERMISSIONS": "Le champ '{field}' stocke les permissions en string non structurée (risque de bypass)."
+    }
+}
+
+def _msg(rule: str, lang: str, **kwargs) -> str:
+    """Helper to safely retrieve and format localized rules messages."""
+    template = AUDIT_MESSAGES.get(lang, AUDIT_MESSAGES["English"]).get(rule, "")
+    return template.format(**kwargs)
+
+
+def _rule_password(docs, schema, lang="English"):
     """Règles 1 & 2 : mot de passe en clair / haché avec MD5."""
     findings = []
     for field in schema:
@@ -126,7 +159,7 @@ def _rule_password(docs, schema):
             findings.append({
                 "field": field, "rule": "PLAINTEXT_PASSWORD",
                 "severity": "CRITICAL",
-                "message": f"Le champ '{field}' contient des mots de passe en clair (non hachés).",
+                "message": _msg("PLAINTEXT_PASSWORD", lang, field=field),
                 "affected_docs": len(plaintext),
                 "sample": _mask(plaintext[0])
             })
@@ -134,14 +167,14 @@ def _rule_password(docs, schema):
             findings.append({
                 "field": field, "rule": "WEAK_HASH_MD5",
                 "severity": "HIGH",
-                "message": f"Le champ '{field}' utilise MD5, un algorithme déprécié et vulnérable aux rainbow tables.",
+                "message": _msg("WEAK_HASH_MD5", lang, field=field),
                 "affected_docs": len(md5_vals),
                 "sample": _mask(md5_vals[0])
             })
     return findings
 
 
-def _rule_pii(docs, schema):
+def _rule_pii(docs, schema, lang="English"):
     """Règle 3 : données personnelles (PII) stockées en clair."""
     findings = []
     for field in schema:
@@ -153,14 +186,14 @@ def _rule_pii(docs, schema):
             findings.append({
                 "field": field, "rule": "PII_EXPOSED",
                 "severity": "HIGH",
-                "message": f"Le champ '{field}' contient des données personnelles (PII) stockées en clair.",
+                "message": _msg("PII_EXPOSED", lang, field=field),
                 "affected_docs": len(exposed),
                 "sample": _mask(exposed[0])
             })
     return findings
 
 
-def _rule_token(docs, schema):
+def _rule_token(docs, schema, lang="English"):
     """Règle 4 : tokens / clés API non protégés."""
     findings = []
     for field in schema:
@@ -178,14 +211,14 @@ def _rule_token(docs, schema):
             findings.append({
                 "field": field, "rule": "TOKEN_EXPOSED",
                 "severity": "HIGH",
-                "message": f"Le champ '{field}' contient des tokens/clés API en clair.",
+                "message": _msg("TOKEN_EXPOSED", lang, field=field),
                 "affected_docs": len(exposed),
                 "sample": _mask(exposed[0])
             })
     return findings
 
 
-def _rule_nosql_injection(docs, schema):
+def _rule_nosql_injection(docs, schema, lang="English"):
     """Règle 5 : valeurs contenant des opérateurs NoSQL."""
     findings = []
     for field, info in schema.items():
@@ -200,14 +233,14 @@ def _rule_nosql_injection(docs, schema):
             findings.append({
                 "field": field, "rule": "NOSQL_INJECTION_RISK",
                 "severity": "MEDIUM",
-                "message": f"Le champ '{field}' contient des opérateurs NoSQL dans ses valeurs (risque d'injection).",
+                "message": _msg("NOSQL_INJECTION_RISK", lang, field=field),
                 "affected_docs": len(suspicious),
                 "sample": _mask(suspicious[0])
             })
     return findings
 
 
-def _rule_type_juggling(docs, schema):
+def _rule_type_juggling(docs, schema, lang="English"):
     """Règle 6 : champs financiers/rôles avec types mixtes (type juggling)."""
     sensitive = FINANCIAL_FIELDS | {"role", "isadmin", "admin"}
     findings = []
@@ -219,15 +252,14 @@ def _rule_type_juggling(docs, schema):
             findings.append({
                 "field": field, "rule": "TYPE_JUGGLING",
                 "severity": "MEDIUM",
-                "message": (f"Le champ sensible '{field}' a des types mixtes "
-                            f"({', '.join(types.keys())}), risque de type juggling."),
+                "message": _msg("TYPE_JUGGLING", lang, field=field, types=", ".join(types.keys())),
                 "affected_docs": info.get("count", 0),
                 "sample": "—"
             })
     return findings
 
 
-def _rule_card_data(docs, schema):
+def _rule_card_data(docs, schema, lang="English"):
     """Règle 7 : données de carte bancaire exposées."""
     findings = []
     for field in schema:
@@ -239,28 +271,28 @@ def _rule_card_data(docs, schema):
             findings.append({
                 "field": field, "rule": "CARD_DATA_EXPOSED",
                 "severity": "CRITICAL",
-                "message": f"Le champ '{field}' expose potentiellement des données bancaires (violation PCI-DSS).",
+                "message": _msg("CARD_DATA_EXPOSED", lang, field=field),
                 "affected_docs": len(exposed),
                 "sample": _mask(str(exposed[0]))
             })
     return findings
 
 
-def _rule_missing_timestamps(docs, schema):
+def _rule_missing_timestamps(docs, schema, lang="English"):
     """Règle 8 : absence de champs de traçabilité."""
     fields_norm = {_normalize(f) for f in schema}
     if not any(f in TIMESTAMP_FIELDS for f in fields_norm):
         return [{
             "field": "—", "rule": "MISSING_TIMESTAMPS",
             "severity": "INFO",
-            "message": "La collection n'a pas de champs de traçabilité (createdAt/updatedAt). L'audit trail est impossible.",
+            "message": _msg("MISSING_TIMESTAMPS", lang),
             "affected_docs": len(docs),
             "sample": "—"
         }]
     return []
 
 
-def _rule_role_exposed(docs, schema):
+def _rule_role_exposed(docs, schema, lang="English"):
     """Règle 9 : champs role/isAdmin exposés en clair."""
     findings = []
     for field in schema:
@@ -272,14 +304,14 @@ def _rule_role_exposed(docs, schema):
             findings.append({
                 "field": field, "rule": "ROLE_FIELD_EXPOSED",
                 "severity": "MEDIUM",
-                "message": f"Le champ '{field}' expose les rôles/privilèges en clair sans protection.",
+                "message": _msg("ROLE_FIELD_EXPOSED", lang, field=field),
                 "affected_docs": len(exposed),
                 "sample": _mask(str(exposed[0]))
             })
     return findings
 
 
-def _rule_unstructured_permissions(docs, schema):
+def _rule_unstructured_permissions(docs, schema, lang="English"):
     """Règle 10 : permissions/ACL stockées en string non structurée."""
     findings = []
     for field, info in schema.items():
@@ -292,7 +324,7 @@ def _rule_unstructured_permissions(docs, schema):
                 findings.append({
                     "field": field, "rule": "UNSTRUCTURED_PERMISSIONS",
                     "severity": "MEDIUM",
-                    "message": f"Le champ '{field}' stocke les permissions en string non structurée (risque de bypass).",
+                    "message": _msg("UNSTRUCTURED_PERMISSIONS", lang, field=field),
                     "affected_docs": len(plain),
                     "sample": _mask(plain[0])
                 })
@@ -321,13 +353,14 @@ _RULES = [
 ]
 
 
-def run_audit(docs: list, schema: dict) -> dict:
+def run_audit(docs: list, schema: dict, lang: str = "English") -> dict:
     """
     Lance l'audit de sécurité sur une collection.
 
     Args:
         docs:   liste de documents bruts (dicts Python)
         schema: schéma inféré par infer_schema()
+        lang:   langue active ("English" ou "Français")
 
     Returns:
         {
@@ -342,7 +375,7 @@ def run_audit(docs: list, schema: dict) -> dict:
 
     findings = []
     for rule_fn in _RULES:
-        findings.extend(rule_fn(docs, schema))
+        findings.extend(rule_fn(docs, schema, lang=lang))
 
     summary = {"CRITICAL": 0, "HIGH": 0, "MEDIUM": 0, "INFO": 0}
     for f in findings:
@@ -353,3 +386,4 @@ def run_audit(docs: list, schema: dict) -> dict:
         "score": compute_score(findings),
         "summary": summary
     }
+

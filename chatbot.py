@@ -12,9 +12,26 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def render_chatbot():
+CHATBOT_TEXTS = {
+    "English": {
+        "toggle_title": "NoSQL AI Assistant",
+        "welcome": "👋 Hello! I am your NoSQL assistant. Ask me questions about your schemas, security audits, or how to use the application.",
+        "placeholder": "Ask your question...",
+        "error_prefix": "⚠️ Error: "
+    },
+    "Français": {
+        "toggle_title": "Assistant IA NoSQL",
+        "welcome": "👋 Bonjour ! Je suis votre assistant NoSQL. Posez-moi des questions sur vos schémas, vos audits de sécurité, ou l'utilisation de l'application.",
+        "placeholder": "Posez votre question...",
+        "error_prefix": "⚠️ Erreur: "
+    }
+}
+
+
+def render_chatbot(lang="English"):
     """Inject the floating chatbot widget into the Streamlit parent page."""
     api_key = os.getenv("GROQ_API_KEY", "")
+    texts = CHATBOT_TEXTS.get(lang, CHATBOT_TEXTS["English"])
 
     # Full self-contained HTML page rendered in a 0-height iframe.
     # JS reaches into window.parent.document to inject the widget into the
@@ -207,7 +224,7 @@ def render_chatbot():
   var root = doc.createElement('div');
   root.id = 'nsi-chatbot-root';
   root.innerHTML = `
-    <button id="nsi-chatbot-toggle" title="Assistant IA NoSQL">
+    <button id="nsi-chatbot-toggle" title="{texts['toggle_title']}">
       <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none"
            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -241,13 +258,13 @@ def render_chatbot():
 
       <div id="nsi-chatbot-msgs">
         <div class="nsi-bubble bot">
-          👋 Bonjour ! Je suis votre assistant NoSQL. Posez-moi des questions sur vos schémas, vos audits de sécurité, ou l'utilisation de l'application.
+          {texts['welcome']}
         </div>
       </div>
 
       <div id="nsi-chatbot-footer">
         <textarea id="nsi-chatbot-input" rows="1"
-          placeholder="Posez votre question..."></textarea>
+          placeholder="{texts['placeholder']}"></textarea>
         <button id="nsi-chatbot-send">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -273,7 +290,7 @@ def render_chatbot():
   var GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
   var SYS = "You are NoSQL Inspector AI embedded in the NoSQL Schema Inspector app. " +
     "Help with MongoDB/CouchDB/Firestore schemas, security audits, field types, app usage. " +
-    "Be concise and practical. Reply in the user's language (French or English).";
+    "Be concise and practical. You MUST reply in the user's selected language: {lang}.";
 
   function openChat() {{
     panel.classList.remove('nsi-hidden');
@@ -352,7 +369,7 @@ def render_chatbot():
       addBubble('bot', reply);
     }} catch(err) {{
       hideTyping();
-      addBubble('bot', '⚠️ Erreur: ' + err.message);
+      addBubble('bot', '{texts["error_prefix"]}' + err.message);
     }}
 
     sendBtn.disabled = false;
@@ -366,3 +383,4 @@ def render_chatbot():
 
     # height=0 → invisible iframe; scrolling="no" to avoid layout artifacts
     components.html(html, height=0, scrolling=False)
+

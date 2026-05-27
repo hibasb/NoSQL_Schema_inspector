@@ -11,6 +11,7 @@ from exporter import (
     export_security_report_pdf
 )
 from chatbot import render_chatbot
+from i18n import get_text
 
 
 class SafeJSONEncoder(json.JSONEncoder):
@@ -296,8 +297,12 @@ h3 { font-size: 16px !important; }
 </style>
 """, unsafe_allow_html=True)
 
+# ── INITIALISATION LANGUE (I18N) ────────────────────
+if "lang" not in st.session_state:
+    st.session_state["lang"] = "English"
+
 # ── HEADER ANIMÉ ────────────────────────────────────
-st.markdown("""
+st.markdown(f"""
 <div style="
     padding: 32px 0 22px 0;
     margin-bottom: 24px;
@@ -321,9 +326,9 @@ st.markdown("""
                 background: linear-gradient(135deg,#e0e7ff,#c4b5fd,#a5b4fc);
                 -webkit-background-clip:text;
                 -webkit-text-fill-color:transparent;
-            ">NoSQL Schema Inspector</h1>
+            ">{get_text('app_title')}</h1>
             <p style="margin:4px 0 0;font-size:13px;color:#64748b;font-weight:400;">
-                Inspection · Visualisation · Audit de sécurité des bases NoSQL
+                {get_text('app_subtitle')}
             </p>
         </div>
     </div>
@@ -331,15 +336,24 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── SIDEBAR ──────────────────────────────────────────
-st.sidebar.header("Configuration")
+st.sidebar.markdown(f"### Language / Langue")
+selected_lang = st.sidebar.selectbox(
+    "Select Language / Choisir la langue",
+    ["English", "Français"],
+    index=0 if st.session_state["lang"] == "English" else 1,
+    label_visibility="collapsed"
+)
+st.session_state["lang"] = selected_lang
+
+st.sidebar.header(get_text("config_header"))
 
 
 db_type = st.sidebar.selectbox(
-    "Type de base de données",
+    get_text("db_type"),
     list(CONNECTORS.keys())
 )
 
-st.sidebar.subheader("Paramètres de connexion")
+st.sidebar.subheader(get_text("conn_params"))
 
 conn_params = {}
 
@@ -349,28 +363,27 @@ if db_type == "MongoDB":
 
 elif db_type == "CouchDB":
     conn_params["url"] = st.sidebar.text_input("URL", value="http://localhost:5984")
-    conn_params["username"] = st.sidebar.text_input("Utilisateur", value="admin")
-    conn_params["password"] = st.sidebar.text_input("Mot de passe", type="password")
+    conn_params["username"] = st.sidebar.text_input(get_text("couch_user"), value="admin")
+    conn_params["password"] = st.sidebar.text_input(get_text("couch_pass"), type="password")
     db_name = ""  # CouchDB : pas de db_name, les bases sont les collections
 
 elif db_type == "Firebase Firestore":
     st.sidebar.info(
-        "Si GOOGLE_APPLICATION_CREDENTIALS est configuré, laisse tout vide "
-        "et clique directement sur Connecter."
+        get_text("fb_info")
     )
     conn_params["credentials_path"] = st.sidebar.text_input(
-        "Chemin serviceAccountKey.json (optionnel)",
+        get_text("fb_cred_path"),
         value="",
         placeholder="/chemin/vers/serviceAccountKey.json"
     )
-    st.sidebar.markdown("*— ou renseigne les champs manuellement —*")
-    fb_project_id   = st.sidebar.text_input("Project ID", placeholder="mon-projet-firebase")
+    st.sidebar.markdown(get_text("fb_manual_label"))
+    fb_project_id   = st.sidebar.text_input(get_text("fb_project_id"), placeholder="mon-projet-firebase")
     fb_client_email = st.sidebar.text_input(
-        "Client Email",
+        get_text("fb_client_email"),
         placeholder="firebase-adminsdk-xxx@mon-projet.iam.gserviceaccount.com"
     )
     fb_private_key  = st.sidebar.text_area(
-        "Private Key",
+        get_text("fb_private_key"),
         placeholder="-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----",
         height=120
     )
@@ -386,10 +399,10 @@ elif db_type == "Firebase Firestore":
         conn_params["credentials_dict"] = None
     db_name = ""
 
-limit = st.sidebar.number_input("Limite de documents (0 = tous)", min_value=0, value=0)
+limit = st.sidebar.number_input(get_text("doc_limit"), min_value=0, value=0)
 
 # ── CONNEXION + ANALYSE EN UN SEUL BOUTON ─────────────
-if st.sidebar.button("Connecter et analyser"):
+if st.sidebar.button(get_text("btn_connect")):
     # Vider tout l'état de la connexion précédente
     for _key in ["connector", "collections", "db_name", "db_type",
                  "limit", "selected_collections", "analyser_clicked"]:
@@ -402,13 +415,13 @@ if st.sidebar.button("Connecter et analyser"):
     success = connector.connect(**conn_params)
 
     if not success:
-        st.sidebar.error(f"Impossible de se connecter à {db_type}")
+        st.sidebar.error(get_text("err_connect").format(db_type=db_type))
     else:
-        st.sidebar.success(f"Connecté à {db_type}")
+        st.sidebar.success(get_text("success_connect").format(db_type=db_type))
         collections = connector.get_collections(db_name)
 
         if not collections:
-            st.sidebar.warning("Aucune collection trouvée.")
+            st.sidebar.warning(get_text("warn_no_collections"))
         else:
             selected = collections
             st.session_state["connector"] = connector
@@ -430,9 +443,9 @@ if (
     current_db_type = st.session_state["db_type"]
 
     if current_db_type == "CouchDB":
-        label_choisir = "Filtrer les bases à analyser"
+        label_choisir = get_text("filter_bases")
     else:
-        label_choisir = "Filtrer les collections à analyser"
+        label_choisir = get_text("filter_colls")
 
     selected_filtered = st.sidebar.multiselect(
         label_choisir,
@@ -440,7 +453,7 @@ if (
         default=st.session_state.get("selected_collections", collections[:3])
     )
 
-    if st.sidebar.button("Appliquer la sélection"):
+    if st.sidebar.button(get_text("btn_apply")):
         st.session_state["selected_collections"] = selected_filtered
         st.session_state["analyser_clicked"] = True
         for _c in selected_filtered:
@@ -454,7 +467,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
     selected = st.session_state["selected_collections"]
 
     if not selected:
-        st.warning("Veuillez sélectionner au moins une collection.")
+        st.warning(get_text("warn_select_coll"))
     else:
         tabs = st.tabs(selected)
 
@@ -463,7 +476,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                 # ── FETCH DOCS (avec cache par collection) ──────────────
                 _cache_key = f"docs_{coll_name}"
                 if _cache_key not in st.session_state:
-                    with st.spinner(f"Chargement des données de {coll_name}..."):
+                    with st.spinner(get_text("loading_data").format(coll_name=coll_name)):
                         _fresh = connector.get_documents(
                             db_name, coll_name,
                             limit=limit if limit > 0 else None
@@ -473,13 +486,13 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                 docs = st.session_state[_cache_key]
 
                 if not docs:
-                    st.warning(f"Aucun document trouvé dans '{coll_name}'.")
+                    st.warning(get_text("warn_no_docs").format(coll_name=coll_name))
                     continue
 
                 schema = infer_schema(docs)
 
                 if not schema:
-                    st.warning(f"Schéma vide pour '{coll_name}'.")
+                    st.warning(get_text("warn_empty_schema").format(coll_name=coll_name))
                     continue
 
                 # ── EN-TÊTE : titre + bouton Actualiser (top-right) ───────
@@ -487,14 +500,14 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                 with col_title:
                     st.markdown(
                         f"<span style='font-size:13px;color:#6b7280'>"
-                        f"Collection : <b style='color:#1e3a5f'>{coll_name}</b></span>",
+                        f"{get_text('label_collection')}<b style='color:#1e3a5f'>{coll_name}</b></span>",
                         unsafe_allow_html=True
                     )
                 with col_btn:
                     if st.button(
-                        "\u21bb  Actualiser",
+                        get_text("btn_refresh"),
                         key=f"reload_{coll_name}",
-                        help="Re-récupérer les données depuis la base de données",
+                        help=get_text("help_refresh"),
                         use_container_width=True
                     ):
                         # Supprimer le cache de CETTE collection uniquement
@@ -504,9 +517,9 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
 
                 # ── MÉTRIQUES GLOBALES ────────────────────────
                 col1, col2, col3 = st.columns(3)
-                col1.metric("Documents analysés", len(docs))
-                col2.metric("Champs détectés", len(schema))
-                col3.metric("Champs à 100%", sum(
+                col1.metric(get_text("metric_analyzed_docs"), len(docs))
+                col2.metric(get_text("metric_detected_fields"), len(schema))
+                col3.metric(get_text("metric_perfect_fields"), sum(
                     1 for f in schema.values() if f["presence"] == 100.0
                 ))
 
@@ -514,22 +527,22 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
 
                 # ── SOUS-ONGLETS ──────────────────────────────
                 schema_tab, security_tab = st.tabs(
-                    ["Schema & Visualisation", "Audit Securite"]
+                    [get_text("tab_schema_vis"), get_text("tab_sec_audit")]
                 )
 
                 # ═══════════════════════════════════════════════
                 # TAB 1 — SCHÉMA
                 # ═══════════════════════════════════════════════
                 with schema_tab:
-                    st.subheader("Schéma découvert")
+                    st.subheader(get_text("schema_discovered"))
                     rows = [
                         {
-                            "Champ": field,
-                            "Type(s)": ", ".join(
+                            get_text("col_field"): field,
+                            get_text("col_types"): ", ".join(
                                 f"{t}({n}x)" for t, n in info["types"].items()
                             ),
-                            "Présence (%)": info["presence"],
-                            "Occurrences": info["count"]
+                            get_text("col_presence"): info["presence"],
+                            get_text("col_occurrences"): info["count"]
                         }
                         for field, info in sorted(schema.items())
                     ]
@@ -544,31 +557,25 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                             return "background-color: #7f1d1d; color: white"
 
                     dynamic_height = min(400, max(100, len(df) * 35 + 40))
-                    styled_df = df.style.map(color_presence, subset=["Présence (%)"])
+                    styled_df = df.style.map(color_presence, subset=[get_text("col_presence")])
                     st.dataframe(
                         styled_df, width="stretch", height=dynamic_height
                     )
 
                     st.divider()
-                    st.subheader("Schéma visuel")
-                    st.markdown("""
-                    *Guide des couleurs :*
-                    🟢 100% des documents &nbsp;|&nbsp;
-                    🔵 +50% &nbsp;|&nbsp;
-                    ⚫ Rare (-50%) &nbsp;|&nbsp;
-                    🟠 Type mixte
-                    """)
+                    st.subheader(get_text("schema_visual"))
+                    st.markdown(get_text("color_guide"))
                     fig = build_tree_figure(schema, collection_name=coll_name)
                     st.plotly_chart(
                         fig, width="stretch", key=f"chart_{coll_name}"
                     )
 
                     st.divider()
-                    st.subheader("Exporter le schéma")
+                    st.subheader(get_text("export_schema"))
                     col_a, col_b = st.columns(2)
                     with col_a:
                         st.download_button(
-                            "Telecharger JSON (schema)",
+                            get_text("download_json_schema"),
                             json.dumps(schema, indent=2, ensure_ascii=False, cls=SafeJSONEncoder),
                             file_name=f"schema_{coll_name}.json",
                             mime="application/json",
@@ -576,22 +583,22 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                         )
                     with col_b:
                         st.download_button(
-                            "Telecharger CSV (schema)",
+                            get_text("download_csv_schema"),
                             df.to_csv(index=False).encode("utf-8"),
                             file_name=f"schema_{coll_name}.csv",
                             mime="text/csv",
                             key=f"csv_{coll_name}"
                         )
 
-                    with st.expander("Voir les documents bruts"):
+                    with st.expander(get_text("view_raw_docs")):
                         st.json(docs[:5])
 
                 # ═══════════════════════════════════════════════
                 # TAB 2 — AUDIT SÉCURITÉ
                 # ═══════════════════════════════════════════════
                 with security_tab:
-                    with st.spinner("Analyse des vulnérabilités..."):
-                        audit = run_audit(docs, schema)
+                    with st.spinner(get_text("analyzing_vulns")):
+                        audit = run_audit(docs, schema, lang=st.session_state["lang"])
 
                     score   = audit["score"]
                     summary = audit["summary"]
@@ -608,7 +615,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                         )
 
                     with col_cards:
-                        st.markdown("#### Résumé des findings")
+                        st.markdown(f"#### {get_text('summary_findings')}")
                         sev_cfg = [
                             ("CRITICAL", "🔴", "#dc2626", "#450a0a"),
                             ("HIGH",     "🟠", "#ea580c", "#431407"),
@@ -628,7 +635,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                     color:white;
                                     font-size: 15px;
                                 ">
-                                {icon} <b>{sev}</b> — {count} finding(s)
+                                {icon} <b>{sev}</b> — {get_text('finding_count').format(count=count)}
                                 </div>
                                 """,
                                 unsafe_allow_html=True
@@ -639,10 +646,10 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                     # ── Détail des findings ──────────────────
                     if not findings:
                         st.success(
-                            "Aucune vulnérabilité détectée dans cette collection !"
+                            get_text("no_vuln_detected")
                         )
                     else:
-                        st.subheader("Détail des vulnérabilités")
+                        st.subheader(get_text("vuln_details"))
 
                         sev_order = {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "INFO": 3}
                         sorted_findings = sorted(
@@ -674,12 +681,12 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                 <div style="font-size:14px;font-weight:bold;margin-bottom:4px">
                                     {icon} [{f['severity']}] &nbsp;
                                     <code style="color:{fg}">{f['rule']}</code>
-                                    &nbsp;—&nbsp; champ : <b>{f['field']}</b>
+                                    &nbsp;—&nbsp; {get_text('label_field')} : <b>{f['field']}</b>
                                 </div>
                                 <div style="font-size:13px;margin-bottom:4px">{f['message']}</div>
                                 <div style="font-size:12px;opacity:0.8">
-                                    📄 Documents touchés : <b>{f['affected_docs']}</b>
-                                    &nbsp;|&nbsp; Exemple (masqué) :
+                                    {get_text('affected_docs_label')} <b>{f['affected_docs']}</b>
+                                    &nbsp;|&nbsp; {get_text('example_masked_label')}
                                     <code>{f['sample']}</code>
                                 </div>
                                 </div>
@@ -690,12 +697,12 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                     st.divider()
 
                     # ── Export du rapport ────────────────────────
-                    st.subheader("Exporter le rapport de sécurité")
+                    st.subheader(get_text("export_sec_report"))
                     col_rj, col_rc, col_rp = st.columns(3)
 
                     with col_rj:
                         st.download_button(
-                            "Telecharger JSON (rapport)",
+                            get_text("download_json_report"),
                             export_security_report_json(audit, coll_name),
                             file_name=f"security_{coll_name}.json",
                             mime="application/json",
@@ -703,7 +710,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                         )
                     with col_rc:
                         st.download_button(
-                            "Telecharger CSV (rapport)",
+                            get_text("download_csv_report"),
                             export_security_report_csv(audit),
                             file_name=f"security_{coll_name}.csv",
                             mime="text/csv",
@@ -711,9 +718,9 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                         )
                     with col_rp:
                         try:
-                            pdf_bytes = export_security_report_pdf(audit, coll_name)
+                            pdf_bytes = export_security_report_pdf(audit, coll_name, lang=st.session_state["lang"])
                             st.download_button(
-                                "Telecharger PDF (rapport)",
+                                get_text("download_pdf_report"),
                                 pdf_bytes,
                                 file_name=f"security_{coll_name}.pdf",
                                 mime="application/pdf",
@@ -721,9 +728,9 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                             )
                         except ImportError:
                             st.warning(
-                                "Export PDF indisponible : "
-                                "installez reportlab (pip install reportlab)"
+                                get_text("err_pdf_unavailable")
                             )
 
 # ── FLOATING CHATBOT (always rendered last) ───────────────────────────────────
-render_chatbot()
+render_chatbot(lang=st.session_state["lang"])
+

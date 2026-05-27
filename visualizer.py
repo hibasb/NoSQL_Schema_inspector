@@ -1,11 +1,12 @@
 import plotly.graph_objects as go
+from i18n import get_text
 
 def build_tree_figure(schema, collection_name="collection"):
     labels = [f"<b>{collection_name}</b>"]
     parents = [""]
     values = [100]
     colors = ["#1e3a5f"]
-    texts = ["Racine"]
+    texts = [get_text("root_label")]
 
     # Regrouper les champs par niveau
     top_fields = {}
@@ -116,13 +117,13 @@ def build_security_gauge(score: int) -> go.Figure:
     """
     if score >= 70:
         bar_color = "#10b981"   # vert
-        label     = "BON"
+        label     = get_text("score_good")
     elif score >= 40:
         bar_color = "#f59e0b"   # orange
-        label     = "MOYEN"
+        label     = get_text("score_medium")
     else:
         bar_color = "#ef4444"   # rouge
-        label     = "DANGER"
+        label     = get_text("score_danger")
 
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
@@ -130,7 +131,7 @@ def build_security_gauge(score: int) -> go.Figure:
         domain={"x": [0, 1], "y": [0, 1]},
         title={
             "text": (
-                f"Score de Sécurité<br>"
+                f"{get_text('security_score_title')}<br>"
                 f"<span style='font-size:0.85em;color:{bar_color}'>{label}</span>"
             ),
             "font": {"size": 18, "color": "white"}
