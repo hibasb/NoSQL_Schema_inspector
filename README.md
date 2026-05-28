@@ -62,8 +62,13 @@ Project Structure
 
 NoSQL_Schema_inspector/
 │
-├── app.py                  # Main Streamlit interface and orchestration layer
-├── connectors/             # Database connector classes (MongoDB, CouchDB, Firestore)
+
+├── app.py  
+
+# Main Streamlit interface and orchestration layer
+├── connectors/ 
+
+# Database connector classes (MongoDB, CouchDB, Firestore)
 ├── schema_inferrer.py      # Recursive schema inference engine
 ├── security_auditor.py     # Ten-rule security evaluation engine
 ├── visualizer.py           # Plotly treemap and gauge chart generation
@@ -88,6 +93,8 @@ Screenshots
 
 
 Citation
+
+
 If you use NoSQL Schema Inspector in your research, please cite:
 bibtex@article{hanine2026nosql,
   title     = {NoSQL Schema Inspector: A Semi-Automatic Tool for Discovering,
