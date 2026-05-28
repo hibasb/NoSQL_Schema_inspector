@@ -1,5 +1,6 @@
 NoSQL Schema Inspector
 
+
 Automatic schema discovery, interactive visualization, and security auditing for document-oriented NoSQL databases.
 
 
@@ -40,6 +41,7 @@ Key dependencies include: streamlit, pymongo, firebase-admin, requests, plotly, 
 bashcp .env.example .env
 Open .env and add your Groq API key to enable the AI assistant:
 GROQ_API_KEY=your_api_key_here
+
 
 Usage
 
@@ -88,6 +90,7 @@ NoSQL_Schema_inspector/
 Screenshots
 
 
+
 <img width="727" height="340" alt="image" src="https://github.com/user-attachments/assets/14d81a10-757c-485a-9a4c-34742e8d4373" />
 
 
@@ -114,5 +117,7 @@ bibtex@article{hanine2026nosql,
 
 
 Contact
+
+
 For questions or support, contact: mrazzouk233@gmail.com , zahraechokrii@gmail.com  or zahraechokrii@gmail.com 
 National School of Applied Sciences (ENSA), Chouaib Doukkali University, El Jadida, Morocco
