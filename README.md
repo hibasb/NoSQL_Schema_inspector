@@ -63,20 +63,27 @@ Project Structure
 NoSQL_Schema_inspector/
 │
 
-├── app.py  
+├── app.py  # Main Streamlit interface and orchestration layer
 
-# Main Streamlit interface and orchestration layer
-├── connectors/ 
+├── connectors/ # Database connector classes (MongoDB, CouchDB, Firestore)
 
-# Database connector classes (MongoDB, CouchDB, Firestore)
 ├── schema_inferrer.py      # Recursive schema inference engine
+
 ├── security_auditor.py     # Ten-rule security evaluation engine
+
 ├── visualizer.py           # Plotly treemap and gauge chart generation
+
 ├── exporter.py             # JSON, CSV, and PDF report generation
+
 ├── chatbot.py              # Groq/LLaMA 3 AI assistant widget
+
 ├── requirements.txt        # Python dependencies
+
 ├── .env.example            # Environment variable template
+
 └── README.md
+
+
 
 Screenshots
 
