@@ -26,6 +26,8 @@ A Groq API key (for the AI assistant feature)
 
 
 Installation
+
+
 1. Clone the repository
 bashgit clone https://github.com/hibasb/NoSQL_Schema_inspector.git
 cd NoSQL_Schema_inspector
@@ -40,6 +42,8 @@ Open .env and add your Groq API key to enable the AI assistant:
 GROQ_API_KEY=your_api_key_here
 
 Usage
+
+
 Launch the application:
 bashstreamlit run app.py
 The interface opens automatically in your browser at http://localhost:8501.
@@ -54,6 +58,8 @@ Download your report in JSON, CSV, or PDF format
 
 
 Project Structure
+
+
 NoSQL_Schema_inspector/
 │
 ├── app.py                  # Main Streamlit interface and orchestration layer
@@ -68,8 +74,14 @@ NoSQL_Schema_inspector/
 └── README.md
 
 Screenshots
+
+
 <img width="727" height="340" alt="image" src="https://github.com/user-attachments/assets/14d81a10-757c-485a-9a4c-34742e8d4373" />
+
+
 <img width="724" height="342" alt="image" src="https://github.com/user-attachments/assets/ad4c53df-e67d-430f-aaf7-d50b3cce1aac" />
+
+
 <img width="727" height="343" alt="image" src="https://github.com/user-attachments/assets/57718382-7dea-4b90-8123-add8589d2f29" />
 
 
