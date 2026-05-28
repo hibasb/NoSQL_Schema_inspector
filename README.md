@@ -1,56 +1,92 @@
-# NoSQL Schema Inspector
+NoSQL Schema Inspector
 
-**NoSQL Schema Inspector** est une application web professionnelle construite avec **Streamlit**. Elle permet de se connecter à vos bases de données NoSQL (MongoDB, CouchDB, Firebase Firestore), d'inférer dynamiquement leurs schémas cachés, de les visualiser, et de réaliser un audit de sécurité automatisé.
+Automatic schema discovery, interactive visualization, and security auditing for document-oriented NoSQL databases.
 
-![NoSQL Schema Inspector](images/favicon.png)
 
-## Fonctionnalités Principales
+NoSQL Schema Inspector is an open-source, web-based tool built with Python and Streamlit. It connects to MongoDB, CouchDB, and Firebase Firestore instances, automatically infers their hidden schemas, visualizes them interactively, and runs a ten-rule security audit engine — all from a single interface.
 
-- **Inférence de Schéma** : Détection automatique des champs, types, et pourcentages de présence.
-- **Visualisation** : Cartographie visuelle du schéma avec `Plotly` (Treemaps).
-- **Audit de Sécurité** : Détection de vulnérabilités (mots de passe en clair, PII exposées, risques d'injection NoSQL, tokens, etc.) avec calcul d'un score de sécurité.
-- **Export** : Génération de rapports en JSON, CSV et PDF.
-- **Assistant IA Intégré** : Un chatbot propulsé par Groq (LLaMA 3) pour vous guider.
-- **Connecteurs Multiples** : Supporte MongoDB, CouchDB, et Firestore par défaut. Extensible à d'autres moteurs NoSQL.
+Features
 
-## Installation
+Schema inference — Automatically detects field names, data types, nesting depth, and presence frequency across all documents in a collection.
+Interactive visualization — Renders inferred schemas as hierarchical treemaps using Plotly, with color-coded presence indicators.
+Security audit — Scans sampled field values against 10 built-in security rules (plaintext credentials, PII exposure, NoSQL injection patterns, weak hashes, financial data leaks, missing audit trails) and computes a 0–100 security score.
+Sensitive data masking — Automatically masks values that trigger security rules during display.
+Report export — Downloads audit and schema results in JSON, CSV, and professionally formatted PDF.
+AI assistant — Integrated chatbot powered by Groq (LLaMA 3) to help interpret findings and suggest remediation steps.
+Multi-backend support — Supports MongoDB, CouchDB, and Firebase Firestore out of the box. Easily extensible to other NoSQL engines via the BaseConnector interface.
 
-1. Clonez ce dépôt :
-   ```bash
-   git clone https://github.com/hibasb/NoSQL_Schema_inspector.git
-   cd NoSQL_Schema_inspector
-   ```
 
-2. Créez un environnement virtuel et installez les dépendances :
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Sous Windows : venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-   *(Assurez-vous d'avoir installé les packages comme `streamlit`, `pymongo`, `firebase-admin`, `requests`, `plotly`, `reportlab`,
-   `groq`, `python-dotenv`)*
+Requirements
 
-3. Configuration :
-   Copiez le fichier d'exemple des variables d'environnement et ajoutez votre clé API Groq pour activer le chatbot IA :
-   ```bash
-   cp .env.example .env
-   ```
+Python ≥ 3.11
+pip or Conda
+Compatible with Windows, Linux, and macOS
+A running instance of MongoDB, CouchDB, or Firebase Firestore
+A Groq API key (for the AI assistant feature)
 
-## Utilisation
 
-Lancez l'application Streamlit :
-```bash
-streamlit run app.py
-```
-L'interface s'ouvrira automatiquement dans votre navigateur (généralement à l'adresse `http://localhost:8501`).
+Installation
+1. Clone the repository
+bashgit clone https://github.com/hibasb/NoSQL_Schema_inspector.git
+cd NoSQL_Schema_inspector
+2. Create a virtual environment and install dependencies
+bashpython -m venv venv
+source venv/bin/activate        # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+Key dependencies include: streamlit, pymongo, firebase-admin, requests, plotly, reportlab, pandas, groq, python-dotenv.
+3. Configure environment variables
+bashcp .env.example .env
+Open .env and add your Groq API key to enable the AI assistant:
+GROQ_API_KEY=your_api_key_here
 
-## Structure du Projet
+Usage
+Launch the application:
+bashstreamlit run app.py
+The interface opens automatically in your browser at http://localhost:8501.
+Quick start:
 
-- `app.py` : L'interface principale Streamlit.
-- `connectors/` : Les classes de connexion pour MongoDB, CouchDB, Firestore.
-- `schema_inferrer.py` : La logique d'analyse et de détection des types.
-- `security_auditor.py` : Le moteur d'évaluation des risques et règles de sécurité.
-- `visualizer.py` : La génération des graphiques Plotly.
-- `exporter.py` : La logique de téléchargement des rapports (JSON, CSV, PDF).
-- `chatbot.py` : L'intégration du widget assistant IA.
+Select your database type from the sidebar (MongoDB, CouchDB, or Firebase Firestore)
+Enter your connection URI or credentials
+Click Connect and analyze
+Explore the Schema & Visualization tab for field analysis
+Switch to the Security Audit tab to review vulnerabilities and your security score
+Download your report in JSON, CSV, or PDF format
 
+
+Project Structure
+NoSQL_Schema_inspector/
+│
+├── app.py                  # Main Streamlit interface and orchestration layer
+├── connectors/             # Database connector classes (MongoDB, CouchDB, Firestore)
+├── schema_inferrer.py      # Recursive schema inference engine
+├── security_auditor.py     # Ten-rule security evaluation engine
+├── visualizer.py           # Plotly treemap and gauge chart generation
+├── exporter.py             # JSON, CSV, and PDF report generation
+├── chatbot.py              # Groq/LLaMA 3 AI assistant widget
+├── requirements.txt        # Python dependencies
+├── .env.example            # Environment variable template
+└── README.md
+
+Screenshots
+<img width="727" height="340" alt="image" src="https://github.com/user-attachments/assets/14d81a10-757c-485a-9a4c-34742e8d4373" />
+<img width="724" height="342" alt="image" src="https://github.com/user-attachments/assets/ad4c53df-e67d-430f-aaf7-d50b3cce1aac" />
+<img width="727" height="343" alt="image" src="https://github.com/user-attachments/assets/57718382-7dea-4b90-8123-add8589d2f29" />
+
+
+
+
+Citation
+If you use NoSQL Schema Inspector in your research, please cite:
+bibtex@article{hanine2026nosql,
+  title     = {NoSQL Schema Inspector: A Semi-Automatic Tool for Discovering,
+               Visualizing, and Auditing Document Database Structures},
+  author    = {Razzouk Majda ,Chokri, Zahra and Sebban Hiba  },
+  journal   = {SoftwareX},
+  year      = {2026},
+}
+
+
+
+Contact
+For questions or support, contact: mrazzouk233@gmail.com , zahraechokrii@gmail.com  or zahraechokrii@gmail.com 
+National School of Applied Sciences (ENSA), Chouaib Doukkali University, El Jadida, Morocco
