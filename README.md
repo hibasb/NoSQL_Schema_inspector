@@ -219,21 +219,18 @@ NoSQL_Schema_inspector/
 
 ### Main Interface
 
-```markdown
-![Main Interface](https://github.com/user-attachments/assets/14d81a10-757c-485a-9a4c-34742e8d4373)
-```
+<img width="727" height="340" alt="image" src="https://github.com/user-attachments/assets/14d81a10-757c-485a-9a4c-34742e8d4373" />
+
 
 ### Schema Visualization
 
-```markdown
-![Schema Visualization](https://github.com/user-attachments/assets/ad4c53df-e67d-430f-aaf7-d50b3cce1aac)
-```
+<img width="724" height="342" alt="image" src="https://github.com/user-attachments/assets/ad4c53df-e67d-430f-aaf7-d50b3cce1aac" />
+
 
 ### Security Audit Dashboard
 
-```markdown
-![Security Audit](https://github.com/user-attachments/assets/57718382-7dea-4b90-8123-add8589d2f29)
-```
+<img width="727" height="343" alt="image" src="https://github.com/user-attachments/assets/57718382-7dea-4b90-8123-add8589d2f29" />
+
 
 ---
 
