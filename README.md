@@ -234,6 +234,12 @@ NoSQL_Schema_inspector/
 
 ---
 
+## License
+This project is licensed under the MIT License.
+See the [LICENSE](LICENSE) file for details.
+
+---
+
 ## Research Citation
 
 If you use this framework in academic research, please cite:
@@ -241,11 +247,12 @@ If you use this framework in academic research, please cite:
 ```bibtex
 @article{hanine2026nosql,
   title   = {NoSQL Schema Inspector: A Semi-Automatic Tool for Discovering, Visualizing, and Auditing Document Database Structures},
-  author  = {Razzouk Majda, Chokri Zahra and Sebban Hiba},
+  author  = {Hanine, Mohamed and Chokri, Zahra and Sebban, Hiba and Razzouk, Majda},
   journal = {SoftwareX},
   year    = {2026}
 }
 ```
+**Archive:** [https://doi.org/10.5281/zenodo.20443132](https://doi.org/10.5281/zenodo.20443132)
 
 ---
 
