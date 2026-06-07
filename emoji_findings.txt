@@ -1,0 +1,1 @@
+.\chatbot.py:256 -> Matches: ['✕'] | Content: <button id="nsi-chatbot-close">✕</button>

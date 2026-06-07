@@ -15,15 +15,15 @@ load_dotenv()
 CHATBOT_TEXTS = {
     "English": {
         "toggle_title": "NoSQL AI Assistant",
-        "welcome": "👋 Hello! I am your NoSQL assistant. Ask me questions about your schemas, security audits, or how to use the application.",
+        "welcome": "Hello! I am your NoSQL assistant. Ask me questions about your schemas, security audits, or how to use the application.",
         "placeholder": "Ask your question...",
-        "error_prefix": "⚠️ Error: "
+        "error_prefix": "Error: "
     },
     "Français": {
         "toggle_title": "Assistant IA NoSQL",
-        "welcome": "👋 Bonjour ! Je suis votre assistant NoSQL. Posez-moi des questions sur vos schémas, vos audits de sécurité, ou l'utilisation de l'application.",
+        "welcome": "Bonjour ! Je suis votre assistant NoSQL. Posez-moi des questions sur vos schémas, vos audits de sécurité, ou l'utilisation de l'application.",
         "placeholder": "Posez votre question...",
-        "error_prefix": "⚠️ Erreur: "
+        "error_prefix": "Erreur: "
     }
 }
 

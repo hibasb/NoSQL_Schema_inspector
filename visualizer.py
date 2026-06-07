@@ -138,7 +138,7 @@ def build_security_gauge(score: int) -> go.Figure:
         },
         number={
             "suffix": " / 100",
-            "font": {"size": 42, "color": bar_color}
+            "font": {"size": 36, "color": bar_color}
         },
         gauge={
             "axis": {
@@ -168,7 +168,7 @@ def build_security_gauge(score: int) -> go.Figure:
         paper_bgcolor="#111827",
         font={"color": "white"},
         height=280,
-        margin=dict(t=60, b=10, l=30, r=30)
+        margin=dict(t=80, b=40, l=30, r=30)
     )
 
     return fig
