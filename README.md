@@ -69,6 +69,31 @@ The framework integrates a conversational assistant powered by Groq and LLaMA 3 
 * Identifying remediation strategies
 * Explaining detected vulnerabilities
 
+### Schema Drift Detection
+
+The platform supports saving schema snapshots and comparing them over time to detect:
+
+* Schema changes (added/removed fields, modified types)
+* Common migration patterns (renamed fields, nullable field transitions)
+* Schema stability scores (from 0 to 100) based on severity metrics
+
+### Data Quality Profiling
+
+An integrated semantic profiler runs checks on document structures to:
+
+* Measure overall data quality and completeness
+* Generate semantic findings and recommendations
+* Compute structural and content wellness grades (A to F)
+
+### Real-Time Change Monitoring
+
+The application automatically listens to database changes in the background:
+
+* **MongoDB**: Change Streams (Replica Set) with a safe polling fallback
+* **Firebase Firestore**: Native real-time listeners
+* **CouchDB**: Continuous changes feed tracking
+* **UI Auto-Refresh**: Automatic cache invalidation and UI updates upon document modifications
+
 ### Multi-Database Support
 
 The framework currently supports:
