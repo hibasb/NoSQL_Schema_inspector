@@ -17,3 +17,5 @@ envs/
 # Data
 *.csv
 *.json.bak
+
+snapshots.json

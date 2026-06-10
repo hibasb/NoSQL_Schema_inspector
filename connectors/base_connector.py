@@ -22,3 +22,18 @@ class BaseConnector(ABC):
     def close(self):
         """Fermer la connexion."""
         pass
+
+    def start_listener(self, db_name: str, collection_name: str, callback) -> bool:
+        """Démarre un écouteur de changements en arrière-plan.
+        Appelle `callback()` à chaque modification détectée.
+        Retourne True si l'écouteur est démarré avec succès.
+        """
+        return False
+
+    def stop_listener(self, collection_name: str):
+        """Arrête l'écouteur de changements pour la collection spécifiée."""
+        pass
+
+    def stop_all_listeners(self):
+        """Arrête tous les écouteurs de changements actifs."""
+        pass

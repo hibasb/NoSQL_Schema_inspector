@@ -8,6 +8,7 @@ class FirestoreConnector(BaseConnector):
     def __init__(self):
         self.db = None
         self.app = None
+        self.listeners = {}  # Format: { collection_name: watch_object }
 
     def connect(self, credentials_path="", **kwargs) -> bool:
         try:
@@ -54,8 +55,46 @@ class FirestoreConnector(BaseConnector):
             print(f"Erreur get_documents: {e}")
             return []
 
+    def start_listener(self, db_name: str, collection_name: str, callback) -> bool:
+        # Arrêter un écouteur existant s'il y en a un
+        self.stop_listener(collection_name)
+
+        try:
+            col_ref = self.db.collection(collection_name)
+
+            # Éviter de déclencher immédiatement sur l'état initial
+            is_initialized = False
+
+            def on_snapshot_callback(col_snapshot, changes, read_time):
+                nonlocal is_initialized
+                if not is_initialized:
+                    is_initialized = True
+                    return
+                if changes:
+                    callback()
+
+            watch = col_ref.on_snapshot(on_snapshot_callback)
+            self.listeners[collection_name] = watch
+            return True
+        except Exception as e:
+            print(f"Erreur lors du démarrage de l'écouteur Firestore pour {collection_name} : {e}")
+            return False
+
+    def stop_listener(self, collection_name: str):
+        if collection_name in self.listeners:
+            watch = self.listeners.pop(collection_name)
+            try:
+                watch.unsubscribe()
+            except Exception:
+                pass
+
+    def stop_all_listeners(self):
+        for coll_name in list(self.listeners.keys()):
+            self.stop_listener(coll_name)
+
     def close(self):
         try:
+            self.stop_all_listeners()
             if self.app:
                 firebase_admin.delete_app(self.app)
                 self.app = None

@@ -20,6 +20,8 @@ from semantic_profiler import (
     export_report_csv as export_quality_csv,
     generate_pdf_report as generate_quality_pdf
 )
+from streamlit.runtime.scriptrunner import get_script_run_ctx
+from realtime_monitor import sync_listeners, cleanup_session, get_changed_collections
 
 
 class SafeJSONEncoder(json.JSONEncoder):
@@ -440,7 +442,12 @@ limit = st.sidebar.number_input(get_text("doc_limit"), min_value=0, value=0)
 
 # ── CONNEXION + ANALYSE EN UN SEUL BOUTON ─────────────
 if st.sidebar.button(get_text("btn_connect")):
-    # Vider tout l'état de la connexion précédente
+    # Vider tout l'état de la connexion précédente et nettoyer les anciens écouteurs
+    ctx = get_script_run_ctx()
+    session_id = ctx.session_id if ctx else None
+    if session_id:
+        cleanup_session(session_id)
+
     for _key in ["connector", "collections", "db_name", "db_type",
                  "limit", "selected_collections", "analyser_clicked"]:
         st.session_state.pop(_key, None)
@@ -502,6 +509,31 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
     db_name = st.session_state["db_name"]
     limit = st.session_state["limit"]
     selected = st.session_state["selected_collections"]
+
+    # Synchroniser les écouteurs en arrière-plan
+    ctx = get_script_run_ctx()
+    session_id = ctx.session_id if ctx else None
+    if session_id:
+        sync_listeners(session_id, connector, db_name, selected)
+
+        # Watcher léger exécuté toutes les 2 secondes
+        @st.fragment(run_every=2)
+        def change_watcher(sid):
+            changed_cols = get_changed_collections(sid)
+            if changed_cols:
+                has_changes = False
+                for c in changed_cols:
+                    cache_key = f"docs_{c}"
+                    if cache_key in st.session_state:
+                        st.session_state.pop(cache_key, None)
+                        has_changes = True
+                if has_changes:
+                    st.toast("Modification détectée ! Rafraîchissement automatique du schéma...", icon=":material/sync:")
+                    import time
+                    time.sleep(0.5)
+                    st.rerun()
+
+        change_watcher(session_id)
 
     if not selected:
         st.warning(get_text("warn_select_coll"))

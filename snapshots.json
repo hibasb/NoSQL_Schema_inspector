@@ -7148,5 +7148,1609 @@
         "occurrences": 500
       }
     ]
+  },
+  {
+    "snapshot_id": "27831845-0428-452c-a4b1-ba28e40ad85e",
+    "label": "test2",
+    "timestamp": "2026-06-10T14:12:22.524855",
+    "database_type": "MongoDB",
+    "database_name": "nosql_test",
+    "collection_name": "users",
+    "schema": [
+      {
+        "field_path": "username",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 8
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 8
+      },
+      {
+        "field_path": "password",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 8
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 8
+      },
+      {
+        "field_path": "email",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 8
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 8
+      },
+      {
+        "field_path": "phone",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          },
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 50.0,
+        "occurrences": 4
+      },
+      {
+        "field_path": "role",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 8
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 8
+      },
+      {
+        "field_path": "isAdmin",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 7
+          }
+        ],
+        "presence_percentage": 87.5,
+        "occurrences": 7
+      },
+      {
+        "field_path": "secret",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "createdAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "updatedAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "dob",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "nationalId",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "permissions",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "token",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "acl",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "api_key",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      }
+    ]
+  },
+  {
+    "snapshot_id": "a8c75582-7db2-4e3b-a3dd-acd051d778de",
+    "label": "test3",
+    "timestamp": "2026-06-10T14:13:43.749619",
+    "database_type": "MongoDB",
+    "database_name": "nosql_test",
+    "collection_name": "users",
+    "schema": [
+      {
+        "field_path": "password",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 8
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 8
+      },
+      {
+        "field_path": "email",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 8
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 8
+      },
+      {
+        "field_path": "phone",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          },
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 50.0,
+        "occurrences": 4
+      },
+      {
+        "field_path": "role",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 8
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 8
+      },
+      {
+        "field_path": "isAdmin",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 7
+          }
+        ],
+        "presence_percentage": 87.5,
+        "occurrences": 7
+      },
+      {
+        "field_path": "secret",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "username",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 7
+          }
+        ],
+        "presence_percentage": 87.5,
+        "occurrences": 7
+      },
+      {
+        "field_path": "createdAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "updatedAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "dob",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "nationalId",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "permissions",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "token",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "acl",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "api_key",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      }
+    ]
+  },
+  {
+    "snapshot_id": "ab766cf5-84c9-4642-a2f3-11344229d13b",
+    "label": "test 4",
+    "timestamp": "2026-06-10T14:14:24.124722",
+    "database_type": "MongoDB",
+    "database_name": "nosql_test",
+    "collection_name": "users",
+    "schema": [
+      {
+        "field_path": "password",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 8
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 8
+      },
+      {
+        "field_path": "email",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 8
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 8
+      },
+      {
+        "field_path": "phone",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          },
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 50.0,
+        "occurrences": 4
+      },
+      {
+        "field_path": "role",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 8
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 8
+      },
+      {
+        "field_path": "isAdmin",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 7
+          }
+        ],
+        "presence_percentage": 87.5,
+        "occurrences": 7
+      },
+      {
+        "field_path": "secret",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "username",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 7
+          }
+        ],
+        "presence_percentage": 87.5,
+        "occurrences": 7
+      },
+      {
+        "field_path": "createdAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "updatedAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "dob",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "nationalId",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "permissions",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "token",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "acl",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 1
+      },
+      {
+        "field_path": "api_key",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 25.0,
+        "occurrences": 2
+      }
+    ]
+  },
+  {
+    "snapshot_id": "e62849e3-f493-4b0f-acd2-09ab8a3c9471",
+    "label": "before3",
+    "timestamp": "2026-06-10T14:23:23.325793",
+    "database_type": "MongoDB",
+    "database_name": "nosql_test",
+    "collection_name": "transactions",
+    "schema": [
+      {
+        "field_path": "transaction_id",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "user_id",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "amount",
+        "types": [
+          {
+            "type": "float",
+            "frequency": 3
+          },
+          {
+            "type": "string",
+            "frequency": 1
+          },
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "cvv",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 60.0,
+        "occurrences": 3
+      },
+      {
+        "field_path": "expiry",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 60.0,
+        "occurrences": 3
+      },
+      {
+        "field_path": "status",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 4
+          }
+        ],
+        "presence_percentage": 80.0,
+        "occurrences": 4
+      },
+      {
+        "field_path": "description",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 40.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "cardNumber",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 40.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "balance",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          },
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 60.0,
+        "occurrences": 3
+      },
+      {
+        "field_path": "creditCard",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 20.0,
+        "occurrences": 1
+      },
+      {
+        "field_path": "solde",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 20.0,
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "snapshot_id": "c16598f5-1709-4b12-8724-262f0056ce70",
+    "label": "before6",
+    "timestamp": "2026-06-10T14:24:23.347720",
+    "database_type": "MongoDB",
+    "database_name": "nosql_test",
+    "collection_name": "transactions",
+    "schema": [
+      {
+        "field_path": "transaction_id",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "user_id",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "amount",
+        "types": [
+          {
+            "type": "float",
+            "frequency": 2
+          },
+          {
+            "type": "string",
+            "frequency": 1
+          },
+          {
+            "type": "integer",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "cvv",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 60.0,
+        "occurrences": 3
+      },
+      {
+        "field_path": "expiry",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 60.0,
+        "occurrences": 3
+      },
+      {
+        "field_path": "status",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 4
+          }
+        ],
+        "presence_percentage": 80.0,
+        "occurrences": 4
+      },
+      {
+        "field_path": "description",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 40.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "cardNumber",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 40.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "balance",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          },
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 60.0,
+        "occurrences": 3
+      },
+      {
+        "field_path": "solde",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 20.0,
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "snapshot_id": "67afb725-e737-4976-9566-e42d5adcc48c",
+    "label": "test1forcouchdb",
+    "timestamp": "2026-06-10T15:34:25.459236",
+    "database_type": "CouchDB",
+    "database_name": "",
+    "collection_name": "test_nosql",
+    "schema": [
+      {
+        "field_path": "type",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 7
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 7
+      },
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "float",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "createdAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "updatedAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "user_id",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "amount",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          },
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "cardNumber",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "cvv",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      },
+      {
+        "field_path": "status",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "balance",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      },
+      {
+        "field_path": "username",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "password",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "email",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "phone",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      },
+      {
+        "field_path": "role",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "isAdmin",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      },
+      {
+        "field_path": "api_key",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      },
+      {
+        "field_path": "token",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "snapshot_id": "1008f424-662c-46a8-9839-068830a774f3",
+    "label": "test2forcouchdb",
+    "timestamp": "2026-06-10T15:35:07.852580",
+    "database_type": "CouchDB",
+    "database_name": "",
+    "collection_name": "test_nosql",
+    "schema": [
+      {
+        "field_path": "type",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 7
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 7
+      },
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "createdAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "updatedAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "float",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      },
+      {
+        "field_path": "user_id",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "amount",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          },
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "cardNumber",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "cvv",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      },
+      {
+        "field_path": "status",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 28.6,
+        "occurrences": 2
+      },
+      {
+        "field_path": "balance",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      },
+      {
+        "field_path": "username",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "password",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "email",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "phone",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      },
+      {
+        "field_path": "role",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 42.9,
+        "occurrences": 3
+      },
+      {
+        "field_path": "isAdmin",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      },
+      {
+        "field_path": "api_key",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      },
+      {
+        "field_path": "token",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 14.3,
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "snapshot_id": "db11817a-aa68-40b7-8b09-2eed4204745b",
+    "label": "test1",
+    "timestamp": "2026-06-10T15:37:33.429410",
+    "database_type": "MongoDB",
+    "database_name": "nosql_test",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "float",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 4
+          }
+        ],
+        "presence_percentage": 80.0,
+        "occurrences": 4
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "description",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 4
+          }
+        ],
+        "presence_percentage": 80.0,
+        "occurrences": 4
+      },
+      {
+        "field_path": "createdAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "updatedAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      }
+    ]
+  },
+  {
+    "snapshot_id": "ce5017aa-c9f6-4a84-8bdf-63c4d72517e3",
+    "label": "testshema2",
+    "timestamp": "2026-06-10T15:46:21.568131",
+    "database_type": "MongoDB",
+    "database_name": "nosql_test",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "float",
+            "frequency": 3
+          },
+          {
+            "type": "integer",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 4
+          }
+        ],
+        "presence_percentage": 80.0,
+        "occurrences": 4
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "description",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 4
+          }
+        ],
+        "presence_percentage": 80.0,
+        "occurrences": 4
+      },
+      {
+        "field_path": "createdAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "updatedAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 4
+          }
+        ],
+        "presence_percentage": 80.0,
+        "occurrences": 4
+      }
+    ]
+  },
+  {
+    "snapshot_id": "2469c6f5-5344-4777-aeb1-1682655d0e13",
+    "label": "testshema3",
+    "timestamp": "2026-06-10T15:47:30.754259",
+    "database_type": "MongoDB",
+    "database_name": "nosql_test",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "float",
+            "frequency": 3
+          },
+          {
+            "type": "integer",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 4
+          }
+        ],
+        "presence_percentage": 80.0,
+        "occurrences": 4
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "description",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 3
+          }
+        ],
+        "presence_percentage": 60.0,
+        "occurrences": 3
+      },
+      {
+        "field_path": "createdAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "updatedAt",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 5
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 5
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 4
+          }
+        ],
+        "presence_percentage": 80.0,
+        "occurrences": 4
+      }
+    ]
   }
 ]
