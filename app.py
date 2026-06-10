@@ -806,18 +806,26 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                 with drift_tab:
                     st.subheader(get_text("drift_detector_title"))
                     
+                    @st.dialog(get_text("drift_save_popover"))
+                    def save_snapshot_dialog(coll_name_arg, db_name_arg, schema_arg):
+                        st.caption(get_text("drift_refresh_tip"))
+                        snap_label = st.text_input(get_text("drift_label_input"), placeholder=get_text("drift_label_placeholder"), key=f"dlg_snap_label_{coll_name_arg}")
+                        if st.button(get_text("drift_btn_save"), key=f"dlg_save_snap_{coll_name_arg}"):
+                            if snap_label:
+                                save_snapshot(snap_label, st.session_state["db_type"], db_name_arg, coll_name_arg, schema_arg)
+                                st.session_state['success_msg'] = get_text("drift_success_save")
+                                st.rerun()
+                            else:
+                                st.error(get_text("drift_err_label"))
+
+                    if 'success_msg' in st.session_state:
+                        st.toast(st.session_state['success_msg'], icon=":material/check_circle:")
+                        del st.session_state['success_msg']
+
                     col_save, col_spacer = st.columns([3, 7])
                     with col_save:
-                        with st.popover(get_text("drift_save_popover")):
-                            st.caption(get_text("drift_refresh_tip"))
-                            snap_label = st.text_input(get_text("drift_label_input"), placeholder=get_text("drift_label_placeholder"), key=f"snap_label_{coll_name}")
-                            if st.button(get_text("drift_btn_save"), key=f"save_snap_{coll_name}"):
-                                if snap_label:
-                                    save_snapshot(snap_label, st.session_state["db_type"], db_name, coll_name, schema)
-                                    st.success(get_text("drift_success_save"))
-                                    st.rerun()
-                                else:
-                                    st.error(get_text("drift_err_label"))
+                        if st.button(get_text("drift_save_popover"), key=f"btn_open_dlg_{coll_name}"):
+                            save_snapshot_dialog(coll_name, db_name, schema)
                     
                     st.divider()
                     

@@ -162,31 +162,35 @@ const SnapshotManager: React.FC<{
       return;
     }
     
+    const labelToSave = newLabel;
+    const isFullScan = forceFull;
+
     setIsSaving(true);
     setProgress(null);
+    setIsModalOpen(false);
+    setNewLabel('');
+    setForceFull(false);
     
     // Simulate streaming iterator
     const mockIterator = async function* () {
-      const chunks = Math.ceil((forceFull ? collectionSize : Math.min(1000, collectionSize)) / 500);
+      const chunks = Math.ceil((isFullScan ? collectionSize : Math.min(1000, collectionSize)) / 500);
       for(let i=0; i<chunks; i++) yield new Array(500).fill({});
     }();
 
     try {
-      const stream = buildSnapshotStream(mockIterator, collectionSize, newLabel, 'mongodb', 'prod_db', 'users', forceFull);
+      const stream = buildSnapshotStream(mockIterator, collectionSize, labelToSave, 'mongodb', 'prod_db', 'users', isFullScan);
       for await (const status of stream) {
         setProgress(status);
         if (status.snapshot) {
           saveSnapshot(status.snapshot);
           onRefresh();
-          setIsModalOpen(false);
-          setNewLabel('');
-          setForceFull(false);
         }
       }
     } catch (e) {
       console.error(e);
     } finally {
       setIsSaving(false);
+      setProgress(null);
     }
   };
 
@@ -206,9 +210,11 @@ const SnapshotManager: React.FC<{
       <div className="flex items-center gap-4">
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 bg-[#7c3aed] hover:bg-[#6d28d9] transition-colors px-4 py-2 rounded-lg text-sm font-medium shadow-[0_0_15px_rgba(124,58,237,0.3)]"
+          disabled={isSaving}
+          className="flex items-center gap-2 bg-[#7c3aed] hover:bg-[#6d28d9] disabled:opacity-50 transition-colors px-4 py-2 rounded-lg text-sm font-medium shadow-[0_0_15px_rgba(124,58,237,0.3)]"
         >
-          <Camera size={16} /> Save Snapshot
+          {isSaving ? <Loader2 size={16} className="animate-spin" /> : <Camera size={16} />}
+          {isSaving ? 'Saving...' : 'Save Snapshot'}
         </button>
 
         <div className="h-6 w-[1px] bg-[#2a2b45] mx-2" />
