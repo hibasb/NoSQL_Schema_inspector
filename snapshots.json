@@ -5098,5 +5098,2055 @@
         "occurrences": 13
       }
     ]
+  },
+  {
+    "snapshot_id": "4a78eab5-cf74-4fa7-a9cb-ed28e61480dd",
+    "label": "test4",
+    "timestamp": "2026-06-08T10:50:17.006763",
+    "database_type": "MongoDB",
+    "database_name": "nosql_inspector_db",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 16
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 16
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          },
+          {
+            "type": "integer",
+            "frequency": 14
+          }
+        ],
+        "presence_percentage": 93.8,
+        "occurrences": 15
+      },
+      {
+        "field_path": "tags",
+        "types": [
+          {
+            "type": "array",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs",
+        "types": [
+          {
+            "type": "object",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 12.5,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs.ram",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 6.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.storage",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 6.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 6.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "test",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 6.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.color",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 6.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.material",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 6.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 13
+          }
+        ],
+        "presence_percentage": 81.2,
+        "occurrences": 13
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 13
+          }
+        ],
+        "presence_percentage": 81.2,
+        "occurrences": 13
+      },
+      {
+        "field_path": "discount",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 6.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "product_id",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 12
+          }
+        ],
+        "presence_percentage": 75.0,
+        "occurrences": 12
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 13
+          }
+        ],
+        "presence_percentage": 81.2,
+        "occurrences": 13
+      },
+      {
+        "field_path": "supplier",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 12
+          }
+        ],
+        "presence_percentage": 75.0,
+        "occurrences": 12
+      },
+      {
+        "field_path": "in_stock",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 13
+          }
+        ],
+        "presence_percentage": 81.2,
+        "occurrences": 13
+      },
+      {
+        "field_path": "rating",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 2
+          },
+          {
+            "type": "float",
+            "frequency": 11
+          }
+        ],
+        "presence_percentage": 81.2,
+        "occurrences": 13
+      },
+      {
+        "field_path": "reviews",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 13
+          }
+        ],
+        "presence_percentage": 81.2,
+        "occurrences": 13
+      },
+      {
+        "field_path": "created_at",
+        "types": [
+          {
+            "type": "unknown",
+            "frequency": 13
+          }
+        ],
+        "presence_percentage": 81.2,
+        "occurrences": 13
+      }
+    ]
+  },
+  {
+    "snapshot_id": "7219bfe8-4e9a-4edb-a0ba-8f9f0e59c3a5",
+    "label": "test5",
+    "timestamp": "2026-06-08T11:37:35.290934",
+    "database_type": "MongoDB",
+    "database_name": "nosql_inspector_db",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 20
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 20
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 19
+          }
+        ],
+        "presence_percentage": 95.0,
+        "occurrences": 19
+      },
+      {
+        "field_path": "tags",
+        "types": [
+          {
+            "type": "array",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 10.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs",
+        "types": [
+          {
+            "type": "object",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 10.0,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs.ram",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 5.0,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.storage",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 5.0,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 5.0,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.color",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 5.0,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.material",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 5.0,
+        "occurrences": 1
+      },
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 17
+          }
+        ],
+        "presence_percentage": 85.0,
+        "occurrences": 17
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 17
+          }
+        ],
+        "presence_percentage": 85.0,
+        "occurrences": 17
+      },
+      {
+        "field_path": "discount",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 5.0,
+        "occurrences": 1
+      },
+      {
+        "field_path": "product_id",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 16
+          }
+        ],
+        "presence_percentage": 80.0,
+        "occurrences": 16
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 17
+          }
+        ],
+        "presence_percentage": 85.0,
+        "occurrences": 17
+      },
+      {
+        "field_path": "supplier",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 16
+          }
+        ],
+        "presence_percentage": 80.0,
+        "occurrences": 16
+      },
+      {
+        "field_path": "in_stock",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 17
+          }
+        ],
+        "presence_percentage": 85.0,
+        "occurrences": 17
+      },
+      {
+        "field_path": "rating",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 4
+          },
+          {
+            "type": "float",
+            "frequency": 13
+          }
+        ],
+        "presence_percentage": 85.0,
+        "occurrences": 17
+      },
+      {
+        "field_path": "reviews",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 17
+          }
+        ],
+        "presence_percentage": 85.0,
+        "occurrences": 17
+      },
+      {
+        "field_path": "created_at",
+        "types": [
+          {
+            "type": "unknown",
+            "frequency": 17
+          }
+        ],
+        "presence_percentage": 85.0,
+        "occurrences": 17
+      }
+    ]
+  },
+  {
+    "snapshot_id": "30061235-6608-4cf4-848c-7cf29c56dad1",
+    "label": "test6",
+    "timestamp": "2026-06-08T12:12:10.193646",
+    "database_type": "MongoDB",
+    "database_name": "nosql_inspector_db",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 503
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 503
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 502
+          }
+        ],
+        "presence_percentage": 99.8,
+        "occurrences": 502
+      },
+      {
+        "field_path": "tags",
+        "types": [
+          {
+            "type": "array",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs",
+        "types": [
+          {
+            "type": "object",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs.ram",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.storage",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.color",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.material",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "discount",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "product_id",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 499
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "supplier",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 499
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "in_stock",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "rating",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 53
+          },
+          {
+            "type": "float",
+            "frequency": 447
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "reviews",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "created_at",
+        "types": [
+          {
+            "type": "unknown",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      }
+    ]
+  },
+  {
+    "snapshot_id": "aaee19b7-c77f-449e-b940-5c112cc37097",
+    "label": "test7",
+    "timestamp": "2026-06-08T12:13:44.433314",
+    "database_type": "MongoDB",
+    "database_name": "nosql_inspector_db",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 503
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 503
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 502
+          }
+        ],
+        "presence_percentage": 99.8,
+        "occurrences": 502
+      },
+      {
+        "field_path": "tags",
+        "types": [
+          {
+            "type": "array",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs",
+        "types": [
+          {
+            "type": "object",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs.ram",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.storage",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.color",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.material",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "discount",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "product_id",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 499
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "supplier",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 499
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "in_stock",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "rating",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 53
+          },
+          {
+            "type": "float",
+            "frequency": 447
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "reviews",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "created_at",
+        "types": [
+          {
+            "type": "unknown",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      }
+    ]
+  },
+  {
+    "snapshot_id": "78b5fabb-20aa-4b6e-b7df-d7d33501086b",
+    "label": "test8",
+    "timestamp": "2026-06-08T12:14:16.728654",
+    "database_type": "MongoDB",
+    "database_name": "nosql_inspector_db",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          },
+          {
+            "type": "integer",
+            "frequency": 502
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 503
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 502
+          }
+        ],
+        "presence_percentage": 99.8,
+        "occurrences": 502
+      },
+      {
+        "field_path": "tags",
+        "types": [
+          {
+            "type": "array",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs",
+        "types": [
+          {
+            "type": "object",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs.ram",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.storage",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.color",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.material",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "discount",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "product_id",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 499
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "supplier",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 499
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "in_stock",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "rating",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 53
+          },
+          {
+            "type": "float",
+            "frequency": 447
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "reviews",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "created_at",
+        "types": [
+          {
+            "type": "unknown",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      }
+    ]
+  },
+  {
+    "snapshot_id": "e4d01c2d-95f1-4361-9b22-801beb4eee1f",
+    "label": "test9",
+    "timestamp": "2026-06-08T14:25:00.148812",
+    "database_type": "MongoDB",
+    "database_name": "nosql_inspector_db",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 503
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 503
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 502
+          }
+        ],
+        "presence_percentage": 99.8,
+        "occurrences": 502
+      },
+      {
+        "field_path": "tags",
+        "types": [
+          {
+            "type": "array",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs",
+        "types": [
+          {
+            "type": "object",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs.ram",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.storage",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.color",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.material",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "discount",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "product_id",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          },
+          {
+            "type": "string",
+            "frequency": 498
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "supplier",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 499
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "in_stock",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "rating",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 53
+          },
+          {
+            "type": "float",
+            "frequency": 447
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "reviews",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "created_at",
+        "types": [
+          {
+            "type": "unknown",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      }
+    ]
+  },
+  {
+    "snapshot_id": "5eb76a26-50f5-496b-aacd-4b886c581e86",
+    "label": "test9",
+    "timestamp": "2026-06-08T14:25:01.474625",
+    "database_type": "MongoDB",
+    "database_name": "nosql_inspector_db",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 503
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 503
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 502
+          }
+        ],
+        "presence_percentage": 99.8,
+        "occurrences": 502
+      },
+      {
+        "field_path": "tags",
+        "types": [
+          {
+            "type": "array",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs",
+        "types": [
+          {
+            "type": "object",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs.ram",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.storage",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.color",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.material",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "discount",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "product_id",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          },
+          {
+            "type": "string",
+            "frequency": 498
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "supplier",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 499
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "in_stock",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "rating",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 53
+          },
+          {
+            "type": "float",
+            "frequency": 447
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "reviews",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "created_at",
+        "types": [
+          {
+            "type": "unknown",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      }
+    ]
+  },
+  {
+    "snapshot_id": "4364f1c9-711d-43f9-8ec6-4dd46c8ffe74",
+    "label": "test10",
+    "timestamp": "2026-06-08T14:25:58.462686",
+    "database_type": "MongoDB",
+    "database_name": "nosql_inspector_db",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 503
+          }
+        ],
+        "presence_percentage": 100.0,
+        "occurrences": 503
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 502
+          }
+        ],
+        "presence_percentage": 99.8,
+        "occurrences": 502
+      },
+      {
+        "field_path": "tags",
+        "types": [
+          {
+            "type": "array",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs",
+        "types": [
+          {
+            "type": "object",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs.ram",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.storage",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.color",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.material",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 498
+          },
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "discount",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "product_id",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          },
+          {
+            "type": "string",
+            "frequency": 498
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "supplier",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 499
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "in_stock",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "rating",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 53
+          },
+          {
+            "type": "float",
+            "frequency": 447
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "reviews",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "created_at",
+        "types": [
+          {
+            "type": "unknown",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      }
+    ]
+  },
+  {
+    "snapshot_id": "b34d7d31-3650-40d3-9245-90ba2cf68534",
+    "label": "test11",
+    "timestamp": "2026-06-08T14:27:21.289332",
+    "database_type": "MongoDB",
+    "database_name": "nosql_inspector_db",
+    "collection_name": "products",
+    "schema": [
+      {
+        "field_path": "price",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 502
+          }
+        ],
+        "presence_percentage": 99.8,
+        "occurrences": 502
+      },
+      {
+        "field_path": "stock",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 502
+          }
+        ],
+        "presence_percentage": 99.8,
+        "occurrences": 502
+      },
+      {
+        "field_path": "tags",
+        "types": [
+          {
+            "type": "array",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs",
+        "types": [
+          {
+            "type": "object",
+            "frequency": 2
+          }
+        ],
+        "presence_percentage": 0.4,
+        "occurrences": 2
+      },
+      {
+        "field_path": "specs.ram",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.storage",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.color",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "specs.material",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "name",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 498
+          },
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "category",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "discount",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          }
+        ],
+        "presence_percentage": 0.2,
+        "occurrences": 1
+      },
+      {
+        "field_path": "product_id",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 1
+          },
+          {
+            "type": "string",
+            "frequency": 498
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "brand",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "supplier",
+        "types": [
+          {
+            "type": "string",
+            "frequency": 499
+          }
+        ],
+        "presence_percentage": 99.2,
+        "occurrences": 499
+      },
+      {
+        "field_path": "in_stock",
+        "types": [
+          {
+            "type": "boolean",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "rating",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 53
+          },
+          {
+            "type": "float",
+            "frequency": 447
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "reviews",
+        "types": [
+          {
+            "type": "integer",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      },
+      {
+        "field_path": "created_at",
+        "types": [
+          {
+            "type": "unknown",
+            "frequency": 500
+          }
+        ],
+        "presence_percentage": 99.4,
+        "occurrences": 500
+      }
+    ]
   }
 ]

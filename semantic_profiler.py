@@ -232,6 +232,7 @@ class SemanticProfiler:
             )
 
         # Flatten and load into pandas DataFrame
+        
         flat_docs = self.flatten_documents()
         
         # Batch processing if needed (> 5000 docs)
