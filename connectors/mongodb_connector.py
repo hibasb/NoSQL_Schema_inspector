@@ -10,12 +10,9 @@ class MongoDBConnector(BaseConnector):
         self.listeners = {}  # Format: { collection_name: (thread, stop_event) }
 
     def connect(self, uri="mongodb://localhost:27017", **kwargs) -> bool:
-        try:
-            self.client = MongoClient(uri, serverSelectionTimeoutMS=3000)
-            self.client.admin.command("ping")
-            return True
-        except ConnectionFailure:
-            return False
+        self.client = MongoClient(uri, serverSelectionTimeoutMS=3000)
+        self.client.admin.command("ping")
+        return True
 
     def get_collections(self, db_name: str) -> list:
         try:

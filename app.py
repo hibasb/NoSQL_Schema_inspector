@@ -456,10 +456,20 @@ if st.sidebar.button(get_text("btn_connect")):
         del st.session_state[_key]
 
     connector = CONNECTORS[db_type]()
-    success = connector.connect(**conn_params)
+    try:
+        success = connector.connect(**conn_params)
+        err_msg = ""
+    except Exception as e:
+        success = False
+        err_msg = str(e)
 
     if not success:
-        st.sidebar.error(get_text("err_connect").format(db_type=db_type))
+        base_msg = get_text("err_connect").format(db_type=db_type)
+        final_msg = f"<b>{base_msg}</b><br/><span style='font-size: 0.9em; opacity: 0.9;'>{err_msg}</span>" if err_msg else base_msg
+        st.sidebar.markdown(
+            f"<div style='background-color: rgba(239, 68, 68, 0.1); color: #f87171; padding: 12px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3); margin-bottom: 1rem;'>{final_msg}</div>",
+            unsafe_allow_html=True
+        )
     else:
         st.sidebar.success(get_text("success_connect").format(db_type=db_type))
         collections = connector.get_collections(db_name)
