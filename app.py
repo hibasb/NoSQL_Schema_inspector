@@ -62,7 +62,7 @@ selected_lang_display = st.sidebar.selectbox(
 st.session_state["lang"] = "English" if selected_lang_display == "US" else "Français"
 
 # ══════════════════════════════════════════════════════
-#  PREMIUM CSS — animations + glassmorphism + SaaS style
+#  PREMIUM CSS - animations + glassmorphism + SaaS style
 # ══════════════════════════════════════════════════════
 st.markdown("""
 <style>
@@ -642,7 +642,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                 )
 
                 # ═══════════════════════════════════════════════
-                # TAB 1 — SCHÉMA
+                # TAB 1 - SCHÉMA
                 # ═══════════════════════════════════════════════
                 with schema_tab:
                     st.subheader(get_text("schema_discovered"))
@@ -670,7 +670,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                     dynamic_height = min(400, max(100, len(df) * 35 + 40))
                     styled_df = df.style.map(color_presence, subset=[get_text("col_presence")])
                     st.dataframe(
-                        styled_df, width="stretch", height=dynamic_height
+                        styled_df, use_container_width=True, height=dynamic_height
                     )
 
                     st.divider()
@@ -678,7 +678,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                     st.markdown(get_text("color_guide"))
                     fig = build_tree_figure(schema, collection_name=coll_name)
                     st.plotly_chart(
-                        fig, width="stretch", key=f"chart_{coll_name}"
+                        fig, use_container_width=True, key=f"chart_{coll_name}"
                     )
 
                     st.divider()
@@ -705,7 +705,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                         st.json(docs[:5])
 
                 # ═══════════════════════════════════════════════
-                # TAB 2 — AUDIT SÉCURITÉ
+                # TAB 2 - AUDIT SÉCURITÉ
                 # ═══════════════════════════════════════════════
                 with security_tab:
                     with st.spinner(get_text("analyzing_vulns")):
@@ -721,7 +721,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                     with col_gauge:
                         fig_gauge = build_security_gauge(score)
                         st.plotly_chart(
-                            fig_gauge, width="stretch",
+                            fig_gauge, use_container_width=True,
                             key=f"gauge_{coll_name}"
                         )
 
@@ -843,7 +843,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                             )
 
                 # ═══════════════════════════════════════════════
-                # TAB 3 — SCHEMA DRIFT
+                # TAB 3 - SCHEMA DRIFT
                 # ═══════════════════════════════════════════════
                 with drift_tab:
                     st.subheader(get_text("drift_detector_title"))
@@ -928,7 +928,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                 )
 
                 # ═══════════════════════════════════════════════
-                # TAB 4 — DATA QUALITY
+                # TAB 4 - DATA QUALITY
                 # ═══════════════════════════════════════════════
                 with quality_tab:
 
@@ -1006,7 +1006,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                         )
                     else:
                         _qr = st.session_state[_report_key]
-                        # SemanticReport is a dataclass — access attrs directly
+                        # SemanticReport is a dataclass - access attrs directly
                         _score    = _qr.quality_score
                         _grade    = _qr.grade
                         _findings = _qr.findings          # List[SemanticFinding]

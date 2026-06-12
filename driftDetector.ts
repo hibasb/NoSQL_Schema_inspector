@@ -242,8 +242,8 @@ export function compareSnapshots(snapA: SchemaSnapshot, snapB: SchemaSnapshot): 
     results.push({
       field_path: fieldPath,
       drift_type: driftType,
-      type_of_old_value: oldVal !== null ? String(oldVal) : '—',
-      type_of_new_value: newVal !== null ? String(newVal) : '—',
+      type_of_old_value: oldVal !== null ? String(oldVal) : '-',
+      type_of_new_value: newVal !== null ? String(newVal) : '-',
       information_useful_in_inspector: infoParts.join(' | ') || '-'
     });
   };
@@ -287,7 +287,7 @@ export function compareSnapshots(snapA: SchemaSnapshot, snapB: SchemaSnapshot): 
         let details = undefined;
         if (oldField.presence_percentage === 100) {
           pattern = DriftPattern.SILENT_NULLABLE;
-          details = 'Field became nullable — check application null handling';
+          details = 'Field became nullable - check application null handling';
           patternsDetected.add(pattern);
         }
         addResult(DriftType.PRESENCE_DROPPED, fieldPath, `${oldField.presence_percentage}%`, `${newField.presence_percentage}%`, oldField, newField, pattern, details);

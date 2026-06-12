@@ -117,7 +117,7 @@ export const SchemaDriftTab: React.FC = () => {
           {report.results.length === 0 ? (
             <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-6 rounded-xl flex items-center justify-center gap-3 shadow-lg">
               <CheckCircle2 size={24} />
-              <span className="text-lg font-medium">No drift detected — schemas are 100% identical.</span>
+              <span className="text-lg font-medium">No drift detected - schemas are 100% identical.</span>
             </div>
           ) : (
             <>

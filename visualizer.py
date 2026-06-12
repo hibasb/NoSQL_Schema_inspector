@@ -134,7 +134,7 @@ def build_security_gauge(score: int) -> go.Figure:
                 f"{get_text('security_score_title')}<br>"
                 f"<span style='font-size:0.85em;color:{bar_color}'>{label}</span>"
             ),
-            "font": {"size": 18, "color": "#334155"}
+            "font": {"size": 16, "color": "#0f172a"}
         },
         number={
             "suffix": " / 100",
@@ -166,7 +166,8 @@ def build_security_gauge(score: int) -> go.Figure:
 
     fig.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
-        font={"color": "#334155"},
+        plot_bgcolor="rgba(0,0,0,0)",
+        font={"color": "#0f172a"},
         height=280,
         margin=dict(t=80, b=40, l=30, r=30)
     )
