@@ -1057,6 +1057,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                             _fig_q = go.Figure(go.Indicator(
                                 mode="gauge+number",
                                 value=_score,
+                                align="center",
                                 domain={"x": [0, 1], "y": [0, 1]},
                                 title={
                                     "text": (
@@ -1067,7 +1068,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                 },
                                 number={
                                     "suffix": " / 100",
-                                    "font": {"size": 36, "color": _bar_color}
+                                    "font": {"size": 20, "color": _bar_color}
                                 },
                                 gauge={
                                     "axis": {
@@ -1080,19 +1081,14 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                     "bgcolor": "#f1f5f9",
                                     "borderwidth": 2,
                                     "bordercolor": "#cbd5e1",
-                                    "steps": _step_color,
-                                    "threshold": {
-                                        "line": {"color": _bar_color, "width": 4},
-                                        "thickness": 0.75,
-                                        "value": _score
-                                    }
+                                    "steps": _step_color
                                 }
                             ))
                             _fig_q.update_layout(
                                 paper_bgcolor="rgba(0,0,0,0)",
                                 plot_bgcolor="rgba(0,0,0,0)",
                                 height=280,
-                                margin=dict(t=80, b=40, l=30, r=30)
+                                margin=dict(t=60, b=20, l=20, r=20)
                             )
                             st.plotly_chart(
                                 _fig_q, use_container_width=True,

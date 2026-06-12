@@ -166,8 +166,9 @@ PDF_TEXTS = {
 def _build_footer(canvas, doc):
     """Pied de page avec numero de page et nom de l'application."""
     canvas.saveState()
-    canvas.setFont("Helvetica", 8)
-    canvas.setFillColor("#6b7280")
+    canvas.setFont("Times-Roman", 10)
+    from reportlab.lib import colors
+    canvas.setFillColor(colors.gray)
     page_num = canvas.getPageNumber()
     lang = getattr(doc, "lang", "English")
     footer_text = PDF_TEXTS.get(lang, PDF_TEXTS["English"])["pdf_footer"].format(
@@ -213,25 +214,28 @@ def export_security_report_pdf(audit_result: dict, collection_name: str = "colle
     # ── Styles personnalises ──
     sty_title = ParagraphStyle(
         "RptTitle", parent=styles["Title"],
-        fontSize=22, textColor=colors.HexColor("#1e3a5f"),
-        spaceAfter=14, fontName="Helvetica-Bold"
+        fontSize=20, textColor=colors.black,
+        spaceAfter=14, fontName="Times-Bold"
     )
     sty_subtitle = ParagraphStyle(
-        "RptSubtitle", fontSize=10, textColor=colors.HexColor("#6b7280"),
-        spaceAfter=6
+        "RptSubtitle", fontSize=10, textColor=colors.gray,
+        spaceAfter=6, fontName="Times-Roman"
     )
     sty_section = ParagraphStyle(
         "RptSection", parent=styles["Heading2"],
-        fontSize=15, textColor=colors.HexColor("#1e3a5f"),
-        spaceBefore=14, spaceAfter=6, fontName="Helvetica-Bold"
+        fontSize=15, textColor=colors.black,
+        spaceBefore=14, spaceAfter=6, fontName="Times-Bold"
     )
-    sty_body = styles["Normal"]
+    sty_body = ParagraphStyle(
+        "RptBody", parent=styles["Normal"],
+        fontName="Times-Roman"
+    )
 
     SEV_COLORS = {
-        "CRITICAL": colors.HexColor("#dc2626"),
-        "HIGH":     colors.HexColor("#ea580c"),
-        "MEDIUM":   colors.HexColor("#ca8a04"),
-        "INFO":     colors.HexColor("#2563eb"),
+        "CRITICAL": colors.black,
+        "HIGH":     colors.black,
+        "MEDIUM":   colors.black,
+        "INFO":     colors.black,
     }
     SEV_LABELS = {
         "CRITICAL": t_dict["sev_critical"],
@@ -247,20 +251,17 @@ def export_security_report_pdf(audit_result: dict, collection_name: str = "colle
     # ════════════════════════════════════════════════════════════
     header_data = [[
         Paragraph(f"<b>{APP_NAME}</b>", ParagraphStyle(
-            "HdrLeft", fontSize=13, textColor=colors.white, fontName="Helvetica-Bold"
+            "HdrLeft", fontSize=13, textColor=colors.black, fontName="Times-Bold"
         )),
         Paragraph(f"<b>v{APP_VERSION}</b>", ParagraphStyle(
-            "HdrRight", fontSize=11, textColor=colors.white, alignment=2
+            "HdrRight", fontSize=11, textColor=colors.black, alignment=2, fontName="Times-Roman"
         ))
     ]]
     header = Table(header_data, colWidths=[12 * cm, 5 * cm])
     header.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#1e3a5f")),
+        ("LINEBOTTOM", (0, 0), (-1, -1), 1.5, colors.black),
         ("TOPPADDING", (0, 0), (-1, -1), 10),
         ("BOTTOMPADDING", (0, 0), (-1, -1), 10),
-        ("LEFTPADDING", (0, 0), (-1, -1), 14),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 14),
-        ("ROUNDEDCORNERS", [6, 6, 6, 6]),
     ]))
     story.append(header)
     story.append(Spacer(1, 0.5 * cm))
@@ -275,20 +276,14 @@ def export_security_report_pdf(audit_result: dict, collection_name: str = "colle
         ),
         sty_subtitle
     ))
-    story.append(HRFlowable(
-        width="100%", thickness=2, color=colors.HexColor("#1e3a5f"),
-        spaceAfter=10
-    ))
+    story.append(Spacer(1, 0.5 * cm))
 
     # ════════════════════════════════════════════════════════════
     #  1. SCORE DE SECURITE
     # ════════════════════════════════════════════════════════════
     score = audit_result["score"]
-    score_color = (
-        colors.HexColor("#16a34a") if score >= 70
-        else colors.HexColor("#ea580c") if score >= 40
-        else colors.HexColor("#dc2626")
-    )
+    score_color = colors.black
+
     score_label = (
         t_dict["label_good"] if score >= 70
         else t_dict["label_medium"] if score >= 40
@@ -300,22 +295,19 @@ def export_security_report_pdf(audit_result: dict, collection_name: str = "colle
 
     score_data = [[
         Paragraph(
-            f"<font size='28'><b>{score}</b></font>"
-            f"<font size='14' color='#6b7280'> / 100</font>",
+            f"<font size='28' face='Times-Bold'>{score}</font>"
+            f"<font size='14' color='gray' face='Times-Roman'> / 100</font>",
             ParagraphStyle("ScoreNum", alignment=1, textColor=score_color)
         ),
         Paragraph(
-            f"<font size='16'><b>[{score_label}]</b></font><br/><br/>"
-            f"<font size='9' color='#6b7280'>{score_msg}</font>",
+            f"<font size='16' face='Times-Bold'>[{score_label}]</font><br/><br/>"
+            f"<font size='10' color='gray' face='Times-Roman'>{score_msg}</font>",
             ParagraphStyle("ScoreDesc", alignment=0, textColor=score_color)
         )
     ]]
     score_table = Table(score_data, colWidths=[5 * cm, 12 * cm])
     score_table.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (0, 0), colors.HexColor("#f8fafc")),
-        ("BACKGROUND", (1, 0), (1, 0), colors.HexColor("#f8fafc")),
-        ("BOX", (0, 0), (-1, -1), 1, colors.HexColor("#e5e7eb")),
-        ("ROUNDEDCORNERS", [6, 6, 6, 6]),
+        ("BOX", (0, 0), (-1, -1), 0.5, colors.gray),
         ("TOPPADDING", (0, 0), (-1, -1), 12),
         ("BOTTOMPADDING", (0, 0), (-1, -1), 12),
         ("LEFTPADDING", (0, 0), (-1, -1), 10),
@@ -332,9 +324,9 @@ def export_security_report_pdf(audit_result: dict, collection_name: str = "colle
 
     summary_data = [
         [
-            Paragraph(f"<b>{t_dict['th_severity']}</b>", ParagraphStyle("TH", textColor=colors.white, fontSize=10)),
-            Paragraph(f"<b>{t_dict['th_findings']}</b>", ParagraphStyle("TH2", textColor=colors.white, fontSize=10, alignment=1)),
-            Paragraph(f"<b>{t_dict['th_impact']}</b>", ParagraphStyle("TH3", textColor=colors.white, fontSize=10)),
+            Paragraph(f"<b>{t_dict['th_severity']}</b>", ParagraphStyle("TH", textColor=colors.black, fontName="Times-Bold", fontSize=11)),
+            Paragraph(f"<b>{t_dict['th_findings']}</b>", ParagraphStyle("TH2", textColor=colors.black, fontName="Times-Bold", fontSize=11, alignment=1)),
+            Paragraph(f"<b>{t_dict['th_impact']}</b>", ParagraphStyle("TH3", textColor=colors.black, fontName="Times-Bold", fontSize=11)),
         ],
         [t_dict["sev_critical"], str(summary.get("CRITICAL", 0)), t_dict["impact_critical"]],
         [t_dict["sev_high"],     str(summary.get("HIGH",     0)), t_dict["impact_high"]],
@@ -342,25 +334,15 @@ def export_security_report_pdf(audit_result: dict, collection_name: str = "colle
         [t_dict["sev_info"],     str(summary.get("INFO",     0)), t_dict["impact_info"]],
     ]
 
-    sev_row_colors = [
-        colors.HexColor("#fef2f2"),
-        colors.HexColor("#fff7ed"),
-        colors.HexColor("#fefce8"),
-        colors.HexColor("#eff6ff"),
-    ]
-
     t = Table(summary_data, colWidths=[5 * cm, 4 * cm, 8 * cm])
     style_cmds = [
-        ("BACKGROUND",  (0, 0), (-1, 0), colors.HexColor("#1e3a5f")),
-        ("FONTNAME",    (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("LINEBELOW",   (0, 0), (-1, 0), 1, colors.black),
+        ("FONTNAME",    (0, 1), (-1, -1), "Times-Roman"),
         ("FONTSIZE",    (0, 0), (-1, -1), 10),
-        ("GRID",        (0, 0), (-1, -1), 0.5, colors.HexColor("#d1d5db")),
         ("ALIGN",       (1, 0), (1, -1), "CENTER"),
         ("TOPPADDING",  (0, 0), (-1, -1), 6),
         ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
     ]
-    for i, bg in enumerate(sev_row_colors):
-        style_cmds.append(("BACKGROUND", (0, i + 1), (-1, i + 1), bg))
     t.setStyle(TableStyle(style_cmds))
     story.append(t)
     story.append(Spacer(1, 0.6 * cm))
@@ -388,12 +370,12 @@ def export_security_report_pdf(audit_result: dict, collection_name: str = "colle
 
             # Titre numerote
             finding_title = ParagraphStyle(
-                f"FT{i}", fontSize=11, textColor=sev_color,
-                fontName="Helvetica-Bold", spaceBefore=8, spaceAfter=2
+                f"FT{i}", fontSize=11, textColor=colors.black,
+                fontName="Times-Bold", spaceBefore=8, spaceAfter=2
             )
             story.append(Paragraph(
                 f"3.{i}  [{sev_label}]  {finding['rule']}"
-                f"  -  champ : <font color='#374151'><b>{finding['field']}</b></font>",
+                f"  -  champ : <b>{finding['field']}</b>",
                 finding_title
             ))
 
@@ -407,11 +389,10 @@ def export_security_report_pdf(audit_result: dict, collection_name: str = "colle
             ]]
             dt = Table(detail_data, colWidths=[8.5 * cm, 8.5 * cm])
             dt.setStyle(TableStyle([
-                ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#f8fafc")),
-                ("BOX", (0, 0), (-1, -1), 0.5, colors.HexColor("#e5e7eb")),
+                ("LINEABOVE", (0, 0), (-1, -1), 0.5, colors.lightgrey),
+                ("LINEBELOW", (0, 0), (-1, -1), 0.5, colors.lightgrey),
                 ("TOPPADDING", (0, 0), (-1, -1), 4),
                 ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
-                ("LEFTPADDING", (0, 0), (-1, -1), 6),
             ]))
             story.append(dt)
 
@@ -419,15 +400,12 @@ def export_security_report_pdf(audit_result: dict, collection_name: str = "colle
             reco = _RECOMMENDATIONS.get(lang, _RECOMMENDATIONS["English"]).get(finding["rule"], "")
             if reco:
                 reco_style = ParagraphStyle(
-                    f"Reco{i}", fontSize=9, textColor=colors.HexColor("#166534"),
-                    fontName="Helvetica-Oblique", spaceBefore=2, spaceAfter=4
+                    f"Reco{i}", fontSize=10, textColor=colors.black,
+                    fontName="Times-Italic", spaceBefore=4, spaceAfter=4
                 )
                 story.append(Paragraph(f"{t_dict['label_reco']} {reco}", reco_style))
 
-            story.append(HRFlowable(
-                width="100%", thickness=0.5,
-                color=colors.HexColor("#e5e7eb"), spaceAfter=4
-            ))
+            story.append(Spacer(1, 0.4 * cm))
 
     # ════════════════════════════════════════════════════════════
     #  4. INFORMATIONS DU RAPPORT
@@ -436,7 +414,8 @@ def export_security_report_pdf(audit_result: dict, collection_name: str = "colle
     story.append(Paragraph(t_dict["meta_title"], sty_section))
 
     meta_data = [
-        [t_dict["th_property"], t_dict["th_value"]],
+        [Paragraph(f"<b>{t_dict['th_property']}</b>", ParagraphStyle("THP", textColor=colors.black, fontName="Times-Bold")), 
+         Paragraph(f"<b>{t_dict['th_value']}</b>", ParagraphStyle("THV", textColor=colors.black, fontName="Times-Bold"))],
         [t_dict["prop_app"], f"{APP_NAME} v{APP_VERSION}"],
         [t_dict["prop_coll"], collection_name],
         [t_dict["prop_date"], now_str],
@@ -445,12 +424,10 @@ def export_security_report_pdf(audit_result: dict, collection_name: str = "colle
     ]
     mt = Table(meta_data, colWidths=[6 * cm, 11 * cm])
     mt.setStyle(TableStyle([
-        ("BACKGROUND",  (0, 0), (-1, 0), colors.HexColor("#1e3a5f")),
-        ("TEXTCOLOR",   (0, 0), (-1, 0), colors.white),
-        ("FONTNAME",    (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("LINEBELOW",   (0, 0), (-1, 0), 1, colors.black),
+        ("FONTNAME",    (0, 1), (-1, -1), "Times-Roman"),
         ("FONTSIZE",    (0, 0), (-1, -1), 10),
-        ("GRID",        (0, 0), (-1, -1), 0.5, colors.HexColor("#d1d5db")),
-        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.HexColor("#f9fafb"), colors.white]),
+        ("LINEBELOW",   (0, 1), (-1, -1), 0.5, colors.lightgrey),
         ("TOPPADDING",  (0, 0), (-1, -1), 5),
         ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
     ]))

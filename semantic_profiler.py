@@ -833,8 +833,9 @@ def generate_pdf_report(report: SemanticReport) -> bytes:
 
     def draw_footer(canvas, d):
         canvas.saveState()
-        canvas.setFont("Helvetica", 8)
-        canvas.setFillColor(colors.HexColor("#6b7280"))
+        canvas.setFont("Times-Roman", 10)
+        from reportlab.lib import colors
+        canvas.setFillColor(colors.gray)
         page_num = canvas.getPageNumber()
         canvas.drawCentredString(
             d.pagesize[0] / 2, 1.2 * 28.35,
@@ -847,38 +848,39 @@ def generate_pdf_report(report: SemanticReport) -> bytes:
     # Define custom styles
     sty_title = ParagraphStyle(
         "DocTitle", parent=styles["Title"],
-        fontSize=20, textColor=colors.HexColor("#1e3a5f"),
-        spaceAfter=12, fontName="Helvetica-Bold"
+        fontSize=20, textColor=colors.black,
+        spaceAfter=12, fontName="Times-Bold"
     )
     sty_subtitle = ParagraphStyle(
-        "DocSubtitle", fontSize=10, textColor=colors.HexColor("#6b7280"),
-        spaceAfter=6
+        "DocSubtitle", fontSize=10, textColor=colors.gray,
+        spaceAfter=6, fontName="Times-Roman"
     )
     sty_section = ParagraphStyle(
         "DocSection", parent=styles["Heading2"],
-        fontSize=14, textColor=colors.HexColor("#1e3a5f"),
-        spaceBefore=12, spaceAfter=6, fontName="Helvetica-Bold"
+        fontSize=14, textColor=colors.black,
+        spaceBefore=12, spaceAfter=6, fontName="Times-Bold"
     )
-    sty_body = styles["Normal"]
+    sty_body = ParagraphStyle(
+        "DocBody", parent=styles["Normal"], fontName="Times-Roman"
+    )
     sty_table_header = ParagraphStyle(
-        "THeader", textColor=colors.white, fontSize=9, fontName="Helvetica-Bold"
+        "THeader", textColor=colors.black, fontSize=10, fontName="Times-Bold"
     )
     sty_table_cell = ParagraphStyle(
-        "TCell", fontSize=8, leading=10
+        "TCell", fontSize=9, leading=11, fontName="Times-Roman"
     )
 
     story = []
 
     # Title Banner Header
     header_data = [[
-        Paragraph("<b>NoSQL Schema Inspector</b>", ParagraphStyle("HdrL", fontSize=12, textColor=colors.white, fontName="Helvetica-Bold")),
-        Paragraph("<b>Data Quality Suite</b>", ParagraphStyle("HdrR", fontSize=10, textColor=colors.white, alignment=2))
+        Paragraph("<b>NoSQL Schema Inspector</b>", ParagraphStyle("HdrL", fontSize=12, textColor=colors.black, fontName="Times-Bold")),
+        Paragraph("<b>Data Quality Suite</b>", ParagraphStyle("HdrR", fontSize=10, textColor=colors.black, alignment=2, fontName="Times-Roman"))
     ]]
     header = Table(header_data, colWidths=[11 * cm, 6 * cm])
     header.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#1e3a5f")),
+        ("LINEBOTTOM", (0, 0), (-1, -1), 1.5, colors.black),
         ("PADDING", (0, 0), (-1, -1), 8),
-        ("ROUNDEDCORNERS", [4, 4, 4, 4]),
     ]))
     story.append(header)
     story.append(Spacer(1, 0.4 * cm))
@@ -892,27 +894,21 @@ def generate_pdf_report(report: SemanticReport) -> bytes:
         f"Total Documents: <b>{report.total_documents}</b>",
         sty_subtitle
     ))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor("#1e3a5f"), spaceAfter=10))
+    story.append(Spacer(1, 0.5 * cm))
 
     # 1. Score block
     score = report.quality_score
-    score_color = (
-        colors.HexColor("#16a34a") if score >= 90
-        else colors.HexColor("#ca8a04") if score >= 75
-        else colors.HexColor("#ea580c") if score >= 60
-        else colors.HexColor("#dc2626")
-    )
+    score_color = colors.black
     
     score_data = [[
-        Paragraph(f"<font size='32'><b>{score:.1f}</b></font><font size='14' color='#6b7280'> / 100</font>", ParagraphStyle("ScoreVal", alignment=1, textColor=score_color)),
-        Paragraph(f"<font size='16'><b>Grade {report.grade}</b></font><br/><br/><font size='9' color='#4b5563'>Semantic profile indicates data quality stands at {score:.1f}% with grade {report.grade}. Details of quality checks are cataloged below.</font>", ParagraphStyle("ScoreDesc", alignment=0))
+        Paragraph(f"<font size='32' face='Times-Bold'>{score:.1f}</font><font size='14' color='gray' face='Times-Roman'> / 100</font>", ParagraphStyle("ScoreVal", alignment=1, textColor=score_color)),
+        Paragraph(f"<font size='16' face='Times-Bold'>Grade {report.grade}</font><br/><br/><font size='10' color='gray' face='Times-Roman'>Semantic profile indicates data quality stands at {score:.1f}% with grade {report.grade}. Details of quality checks are cataloged below.</font>", ParagraphStyle("ScoreDesc", alignment=0))
     ]]
     score_table = Table(score_data, colWidths=[5 * cm, 12 * cm])
     score_table.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#f8fafc")),
-        ("BOX", (0, 0), (-1, -1), 0.75, colors.HexColor("#e5e7eb")),
-        ("ROUNDEDCORNERS", [4, 4, 4, 4]),
-        ("PADDING", (0, 0), (-1, -1), 10),
+        ("BOX", (0, 0), (-1, -1), 0.5, colors.gray),
+        ("PADDING", (0, 0), (-1, -1), 15),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 20),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
     ]))
     story.append(Paragraph("1. Data Quality Score", sty_section))
@@ -936,18 +932,17 @@ def generate_pdf_report(report: SemanticReport) -> bytes:
         ]
         
         SEV_COLORS = {
-            "CRITICAL": colors.HexColor("#dc2626"),
-            "HIGH": colors.HexColor("#ea580c"),
-            "MEDIUM": colors.HexColor("#ca8a04"),
-            "INFO": colors.HexColor("#2563eb"),
+            "CRITICAL": colors.black,
+            "HIGH": colors.black,
+            "MEDIUM": colors.black,
+            "INFO": colors.black,
         }
 
         for f in report.findings:
-            sev_col = SEV_COLORS.get(f.severity, colors.black)
             findings_table_data.append([
                 Paragraph(f.field_path, sty_table_cell),
                 Paragraph(f.rule_name, sty_table_cell),
-                Paragraph(f"<font color='{sev_col.hexval()}'><b>{f.severity}</b></font>", sty_table_cell),
+                Paragraph(f"<b>{f.severity}</b>", sty_table_cell),
                 Paragraph(f"{f.affected_rate:.1f}% ({f.affected_count})", sty_table_cell),
                 Paragraph(", ".join(f.examples), sty_table_cell),
                 Paragraph(f.suggestion, sty_table_cell),
@@ -955,9 +950,8 @@ def generate_pdf_report(report: SemanticReport) -> bytes:
             
         t_find = Table(findings_table_data, colWidths=[2.5 * cm, 2.5 * cm, 2 * cm, 2.2 * cm, 3.8 * cm, 4 * cm])
         t_find.setStyle(TableStyle([
-            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#1e3a5f")),
-            ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#cbd5e1")),
-            ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f8fafc")]),
+            ("LINEBELOW", (0, 0), (-1, 0), 1, colors.black),
+            ("LINEBELOW", (0, 1), (-1, -1), 0.5, colors.lightgrey),
             ("VALIGN", (0, 0), (-1, -1), "TOP"),
             ("PADDING", (0, 0), (-1, -1), 4),
         ]))
@@ -997,9 +991,8 @@ def generate_pdf_report(report: SemanticReport) -> bytes:
         
     t_prof = Table(profiles_table_data, colWidths=[2.8 * cm, 2.2 * cm, 1.8 * cm, 1.8 * cm, 3.2 * cm, 2.7 * cm, 2.5 * cm])
     t_prof.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#1e3a5f")),
-        ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#cbd5e1")),
-        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f8fafc")]),
+        ("LINEBELOW", (0, 0), (-1, 0), 1, colors.black),
+        ("LINEBELOW", (0, 1), (-1, -1), 0.5, colors.lightgrey),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
         ("PADDING", (0, 0), (-1, -1), 4),
     ]))

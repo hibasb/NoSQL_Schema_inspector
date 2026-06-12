@@ -128,6 +128,7 @@ def build_security_gauge(score: int) -> go.Figure:
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=score,
+        align="center",
         domain={"x": [0, 1], "y": [0, 1]},
         title={
             "text": (
@@ -138,7 +139,7 @@ def build_security_gauge(score: int) -> go.Figure:
         },
         number={
             "suffix": " / 100",
-            "font": {"size": 36, "color": bar_color}
+            "font": {"size": 20, "color": bar_color}
         },
         gauge={
             "axis": {
@@ -155,12 +156,7 @@ def build_security_gauge(score: int) -> go.Figure:
                 {"range": [0,  40], "color": "#fef2f2"},
                 {"range": [40, 70], "color": "#fff7ed"},
                 {"range": [70, 100], "color": "#f0fdf4"},
-            ],
-            "threshold": {
-                "line": {"color": bar_color, "width": 4},
-                "thickness": 0.75,
-                "value": score
-            }
+            ]
         }
     ))
 
@@ -169,7 +165,7 @@ def build_security_gauge(score: int) -> go.Figure:
         plot_bgcolor="rgba(0,0,0,0)",
         font={"color": "#0f172a"},
         height=280,
-        margin=dict(t=80, b=40, l=30, r=30)
+        margin=dict(t=60, b=20, l=20, r=20)
     )
 
     return fig
