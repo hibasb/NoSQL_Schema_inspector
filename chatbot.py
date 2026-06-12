@@ -98,8 +98,13 @@ def render_chatbot(lang="English"):
         display: flex; flex-direction: column;
         z-index: 999998;
         overflow: hidden;
-        transition: opacity .25s, transform .25s;
+        transition: opacity .25s, transform .25s, width .3s ease, height .3s ease;
         transform-origin: bottom right;
+      }}
+      #nsi-chatbot-panel.nsi-expanded {{
+        width: 800px;
+        height: 85vh;
+        max-width: 95vw;
       }}
       #nsi-chatbot-panel.nsi-hidden {{
         opacity: 0; transform: scale(.88); pointer-events: none;
@@ -129,7 +134,7 @@ def render_chatbot(lang="English"):
         animation: nsiBlink 2s ease infinite;
       }}
       @keyframes nsiBlink {{ 0%,100%{{opacity:1}} 50%{{opacity:.3}} }}
-      #nsi-chatbot-close {{
+      #nsi-chatbot-close, #nsi-chatbot-resize {{
         background:rgba(0,0,0,.04); border:none; border-radius:8px;
         color:#64748b; cursor:pointer;
         width:28px; height:28px; font-size:16px;
@@ -137,6 +142,7 @@ def render_chatbot(lang="English"):
         transition: background .2s, color .2s;
       }}
       #nsi-chatbot-close:hover {{ background:rgba(239,68,68,.1); color:#ef4444; }}
+      #nsi-chatbot-resize:hover {{ background:rgba(99,102,241,.1); color:#6366f1; }}
 
       /* Messages */
       #nsi-chatbot-msgs {{
@@ -254,6 +260,9 @@ def render_chatbot(lang="English"):
           <div class="nsi-hsub">Powered by Groq · LLaMA 3</div>
         </div>
         <div class="nsi-dot"></div>
+        <button id="nsi-chatbot-resize" title="Expand/Collapse">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </button>
         <button id="nsi-chatbot-close">✕</button>
       </div>
 
@@ -282,6 +291,7 @@ def render_chatbot(lang="English"):
   var toggle  = doc.getElementById('nsi-chatbot-toggle');
   var panel   = doc.getElementById('nsi-chatbot-panel');
   var closeBtn= doc.getElementById('nsi-chatbot-close');
+  var resizeBtn = doc.getElementById('nsi-chatbot-resize');
   var input   = doc.getElementById('nsi-chatbot-input');
   var sendBtn = doc.getElementById('nsi-chatbot-send');
   var msgs    = doc.getElementById('nsi-chatbot-msgs');
@@ -318,8 +328,21 @@ def render_chatbot(lang="English"):
     toggle.style.display = 'flex';
   }}
 
+  var isExpanded = false;
+  function toggleExpand() {{
+    isExpanded = !isExpanded;
+    if (isExpanded) {{
+      panel.classList.add('nsi-expanded');
+      resizeBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>';
+    }} else {{
+      panel.classList.remove('nsi-expanded');
+      resizeBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>';
+    }}
+  }}
+
   toggle.addEventListener('click', openChat);
   closeBtn.addEventListener('click', closeChat);
+  resizeBtn.addEventListener('click', toggleExpand);
 
   input.addEventListener('input', function() {{
     this.style.height = 'auto';
