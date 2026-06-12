@@ -100,13 +100,13 @@ footer { display: none !important; }
     box-shadow: none !important;
 }
 
-[data-testid="stSidebarUserContent"] { padding-top: 0px !important; margin-top: -30px !important; }
+[data-testid="stSidebarUserContent"] { padding-top: 0px !important; margin-top: -10px !important; }
 
 .stApp {
-    background: linear-gradient(135deg, #0f0c29 0%, #1a1040 30%, #0f172a 60%, #0c1526 100%) !important;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 30%, #e2e8f0 60%, #cbd5e1 100%) !important;
     background-size: 400% 400% !important;
     animation: gradientBG 18s ease infinite !important;
-    color: #e2e8f0 !important;
+    color: #0f172a !important;
 }
 
 /* ─── Main content animation ─────────────────────── */
@@ -118,19 +118,19 @@ footer { display: none !important; }
 
 /* ─── Sidebar glassmorphism ───────────────────────── */
 [data-testid="stSidebar"] {
-    background: rgba(15, 12, 41, 0.75) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
     backdrop-filter: blur(20px) !important;
-    border-right: 1px solid rgba(139,92,246,0.25) !important;
-    box-shadow: 4px 0 30px rgba(0,0,0,0.4) !important;
+    border-right: 1px solid rgba(139,92,246,0.15) !important;
+    box-shadow: 4px 0 30px rgba(0,0,0,0.05) !important;
     animation: slideInLeft 0.5s ease both !important;
 }
 [data-testid="stSidebar"] .stMarkdown,
 [data-testid="stSidebar"] label,
-[data-testid="stSidebar"] p { color: #cbd5e1 !important; }
+[data-testid="stSidebar"] p { color: #475569 !important; }
 [data-testid="stSidebar"] h1,
 [data-testid="stSidebar"] h2,
 [data-testid="stSidebar"] h3 {
-    color: #f1f5f9 !important;
+    color: #0f172a !important;
     font-weight: 700 !important;
     letter-spacing: -0.02em !important;
 }
@@ -138,9 +138,9 @@ footer { display: none !important; }
 /* ─── Sidebar inputs ─────────────────────────────── */
 [data-testid="stSidebar"] input,
 [data-testid="stSidebar"] textarea {
-    background: rgba(255,255,255,0.05) !important;
+    background: #ffffff !important;
     border: 1px solid rgba(139,92,246,0.3) !important;
-    color: #f1f5f9 !important;
+    color: #0f172a !important;
     border-radius: 8px !important;
     transition: all 0.2s ease !important;
 }
@@ -148,9 +148,18 @@ footer { display: none !important; }
 [data-testid="stSidebar"] textarea:focus {
     border-color: #8b5cf6 !important;
     box-shadow: 0 0 0 3px rgba(139,92,246,0.2), 0 0 12px rgba(139,92,246,0.15) !important;
-    background: rgba(255,255,255,0.08) !important;
+    background: #ffffff !important;
 }
-
+[data-testid="stSidebar"] [data-baseweb="multi-select"] input {
+    width: 0px !important;
+    min-width: 0px !important;
+    max-width: 0px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+            
 /* ─── Primary Button ─────────────────────────────── */
 .stButton > button {
     background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%) !important;
@@ -167,6 +176,9 @@ footer { display: none !important; }
     box-shadow: 0 4px 15px rgba(99,102,241,0.35) !important;
     animation: pulse 2.5s infinite !important;
 }
+.stButton > button p, .stButton > button div, .stButton > button span {
+    color: #ffffff !important;
+}
 .stButton > button:hover {
     background-position: right center !important;
     transform: translateY(-2px) scale(1.02) !important;
@@ -180,8 +192,8 @@ footer { display: none !important; }
 
 /* ─── Download Button ────────────────────────────── */
 [data-testid="stDownloadButton"] > button {
-    background: rgba(255,255,255,0.04) !important;
-    color: #a5b4fc !important;
+    background: #ffffff !important;
+    color: #4f46e5 !important;
     border: 1px solid rgba(139,92,246,0.35) !important;
     border-radius: 8px !important;
     font-weight: 500 !important;
@@ -190,37 +202,37 @@ footer { display: none !important; }
     box-shadow: none !important;
 }
 [data-testid="stDownloadButton"] > button:hover {
-    background: rgba(139,92,246,0.12) !important;
+    background: rgba(139,92,246,0.05) !important;
     border-color: #8b5cf6 !important;
-    color: #c4b5fd !important;
+    color: #4338ca !important;
     transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(139,92,246,0.2) !important;
+    box-shadow: 0 4px 6px -1px rgba(139,92,246,0.1) !important;
 }
 
 /* ─── Metric cards ───────────────────────────────── */
 [data-testid="metric-container"] {
-    background: rgba(255,255,255,0.04) !important;
+    background: #ffffff !important;
     border: 1px solid rgba(139,92,246,0.2) !important;
     border-radius: 12px !important;
     padding: 20px 24px !important;
     backdrop-filter: blur(10px) !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8) !important;
     transition: transform 0.2s ease, box-shadow 0.2s ease !important;
     animation: fadeInUp 0.7s ease both !important;
 }
 [data-testid="metric-container"]:hover {
     transform: translateY(-3px) !important;
-    box-shadow: 0 8px 30px rgba(139,92,246,0.25), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+    box-shadow: 0 8px 15px rgba(139,92,246,0.1), inset 0 1px 0 rgba(255,255,255,1) !important;
 }
 [data-testid="metric-container"] label {
-    color: #94a3b8 !important;
+    color: #64748b !important;
     font-size: 11px !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.08em !important;
 }
 [data-testid="metric-container"] [data-testid="stMetricValue"] {
-    color: #f1f5f9 !important;
+    color: #0f172a !important;
     font-size: 32px !important;
     font-weight: 800 !important;
     letter-spacing: -0.03em !important;
@@ -228,7 +240,7 @@ footer { display: none !important; }
 
 /* ─── Tabs ───────────────────────────────────────── */
 [data-testid="stTabs"] [data-baseweb="tab-list"] {
-    background: rgba(255,255,255,0.03) !important;
+    background: rgba(255,255,255,0.5) !important;
     border-bottom: 1px solid rgba(139,92,246,0.2) !important;
     border-radius: 10px 10px 0 0 !important;
     padding: 4px 8px 0 !important;
@@ -246,13 +258,13 @@ footer { display: none !important; }
     transition: all 0.25s ease !important;
 }
 [data-testid="stTabs"] [aria-selected="true"] {
-    color: #a5b4fc !important;
+    color: #4f46e5 !important;
     border-bottom: 2px solid #8b5cf6 !important;
-    background: rgba(139,92,246,0.1) !important;
-    text-shadow: 0 0 10px rgba(139,92,246,0.5) !important;
+    background: rgba(139,92,246,0.05) !important;
+    text-shadow: none !important;
 }
 [data-testid="stTabs"] [data-baseweb="tab"]:hover {
-    color: #c4b5fd !important;
+    color: #6366f1 !important;
     background: rgba(139,92,246,0.07) !important;
 }
 [data-testid="stTabPanel"] {
@@ -270,18 +282,19 @@ hr {
 }
 
 /* ─── Headers ─────────────────────────────────────── */
-h1,h2,h3 { color: #f1f5f9 !important; letter-spacing: -0.02em !important; font-weight: 700 !important; }
+h1,h2,h3 { color: #0f172a !important; letter-spacing: -0.02em !important; font-weight: 700 !important; }
 h2 { font-size: 20px !important; }
 h3 { font-size: 16px !important; }
 
 /* ─── Alerts ─────────────────────────────────────── */
 [data-testid="stAlert"] {
-    background: rgba(255,255,255,0.04) !important;
+    background: #ffffff !important;
     border-radius: 10px !important;
     border-left-width: 3px !important;
     backdrop-filter: blur(8px) !important;
     font-size: 13px !important;
-    color: #cbd5e1 !important;
+    color: #334155 !important;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1) !important;
     animation: fadeIn 0.4s ease !important;
 }
 
@@ -290,12 +303,12 @@ h3 { font-size: 16px !important; }
     border: 1px solid rgba(139,92,246,0.2) !important;
     border-radius: 10px !important;
     overflow: hidden !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05) !important;
 }
 
 /* ─── Expander ────────────────────────────────────── */
 [data-testid="stExpander"] {
-    background: rgba(255,255,255,0.03) !important;
+    background: #ffffff !important;
     border: 1px solid rgba(139,92,246,0.2) !important;
     border-radius: 10px !important;
     backdrop-filter: blur(10px) !important;
@@ -304,19 +317,19 @@ h3 { font-size: 16px !important; }
 [data-testid="stExpander"]:hover {
     border-color: rgba(139,92,246,0.4) !important;
 }
-[data-testid="stExpander"] summary { color: #94a3b8 !important; font-size: 13px !important; }
+[data-testid="stExpander"] summary { color: #64748b !important; font-size: 13px !important; }
 
 /* ─── Selectbox / Inputs ──────────────────────────── */
 [data-baseweb="select"] > div {
-    background: rgba(255,255,255,0.05) !important;
+    background: #ffffff !important;
     border-color: rgba(139,92,246,0.3) !important;
     border-radius: 8px !important;
-    color: #f1f5f9 !important;
+    color: #0f172a !important;
 }
 [data-testid="stNumberInput"] input {
-    background: rgba(255,255,255,0.05) !important;
+    background: #ffffff !important;
     border-color: rgba(139,92,246,0.3) !important;
-    color: #f1f5f9 !important;
+    color: #0f172a !important;
     border-radius: 8px !important;
 }
 
@@ -327,9 +340,28 @@ h3 { font-size: 16px !important; }
     font-size: 12px !important;
 }
 [data-baseweb="multi-select"] {
-    background: rgba(255,255,255,0.05) !important;
+    background: #ffffff !important;
     border-color: rgba(139,92,246,0.3) !important;
     border-radius: 8px !important;
+}
+[data-testid="stSidebar"] [data-testid="stMultiSelect"] [data-baseweb="select"] > div {
+    flex-wrap: wrap !important;
+    row-gap: 6px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+[data-testid="stSidebar"] [data-testid="stMultiSelect"] [data-baseweb="select"] > div > div {
+    flex-wrap: wrap !important;
+    row-gap: 6px !important;
+}
+[data-testid="stSidebar"] [data-testid="stMultiSelect"] input {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    min-width: 0 !important;
+    width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 /* ─── Spinner ─────────────────────────────────────── */
@@ -906,13 +938,14 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                     st.markdown(
                         f"""
                         <div style="
-                            background:rgba(124,58,237,0.08);
+                            background:#ffffff;
                             border:1px solid rgba(124,58,237,0.25);
                             border-radius:14px;
                             padding:18px 24px 14px;
                             margin-bottom:20px;
+                            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
                         ">
-                            <h3 style="margin:0 0 4px;font-size:18px;color:#e0e7ff;
+                            <h3 style="margin:0 0 4px;font-size:18px;color:#0f172a;
                                        font-weight:700;letter-spacing:-0.02em">
                                 {get_text("quality_title")}
                             </h3>
@@ -956,14 +989,15 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                             <div style="
                                 text-align:center;
                                 padding:60px 20px;
-                                background:rgba(255,255,255,0.02);
-                                border:1px dashed rgba(139,92,246,0.25);
+                                background:#ffffff;
+                                border:1px dashed rgba(139,92,246,0.35);
                                 border-radius:14px;
                                 margin-top:16px;
+                                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
                             ">
                                 <div style="font-size:48px;margin-bottom:12px;
                                             filter:grayscale(0.3)">&#128269;</div>
-                                <div style="color:#94a3b8;font-size:15px">
+                                <div style="color:#64748b;font-size:15px">
                                     {_prompt_html}
                                 </div>
                             </div>
@@ -991,30 +1025,30 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
 
                         if _score >= 80:
                             _bar_color  = "#10b981"
-                            _grade_bg   = "#052e16"
+                            _grade_bg   = "#f0fdf4"
                             _score_lbl  = get_text("quality_lbl_excellent")
                             _step_color = [
-                                {"range": [0,  50], "color": "#450a0a"},
-                                {"range": [50, 80], "color": "#431407"},
-                                {"range": [80, 100], "color": "#052e16"},
+                                {"range": [0,  50], "color": "#fef2f2"},
+                                {"range": [50, 80], "color": "#fff7ed"},
+                                {"range": [80, 100], "color": "#ecfdf5"},
                             ]
                         elif _score >= 50:
                             _bar_color  = "#f59e0b"
-                            _grade_bg   = "#451a03"
+                            _grade_bg   = "#fff7ed"
                             _score_lbl  = get_text("quality_lbl_needs_attention")
                             _step_color = [
-                                {"range": [0,  50], "color": "#450a0a"},
-                                {"range": [50, 80], "color": "#431407"},
-                                {"range": [80, 100], "color": "#052e16"},
+                                {"range": [0,  50], "color": "#fef2f2"},
+                                {"range": [50, 80], "color": "#fff7ed"},
+                                {"range": [80, 100], "color": "#ecfdf5"},
                             ]
                         else:
                             _bar_color  = "#ef4444"
-                            _grade_bg   = "#450a0a"
+                            _grade_bg   = "#fef2f2"
                             _score_lbl  = get_text("quality_lbl_poor")
                             _step_color = [
-                                {"range": [0,  50], "color": "#450a0a"},
-                                {"range": [50, 80], "color": "#431407"},
-                                {"range": [80, 100], "color": "#052e16"},
+                                {"range": [0,  50], "color": "#fef2f2"},
+                                {"range": [50, 80], "color": "#fff7ed"},
+                                {"range": [80, 100], "color": "#ecfdf5"},
                             ]
 
                         _gauge_col, _metrics_col = st.columns([4, 3])
@@ -1029,7 +1063,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                         f"{get_text('quality_score_title')}<br>"
                                         f"<span style='font-size:0.85em;color:{_bar_color}'>{_score_lbl}</span>"
                                     ),
-                                    "font": {"size": 16, "color": "white"}
+                                    "font": {"size": 16, "color": "#0f172a"}
                                 },
                                 number={
                                     "suffix": " / 100",
@@ -1039,13 +1073,13 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                     "axis": {
                                         "range": [0, 100],
                                         "tickwidth": 1,
-                                        "tickcolor": "#9ca3af",
-                                        "tickfont": {"color": "#9ca3af"}
+                                        "tickcolor": "#64748b",
+                                        "tickfont": {"color": "#64748b"}
                                     },
                                     "bar": {"color": _bar_color, "thickness": 0.25},
-                                    "bgcolor": "#1f2937",
+                                    "bgcolor": "#f1f5f9",
                                     "borderwidth": 2,
-                                    "bordercolor": "#374151",
+                                    "bordercolor": "#cbd5e1",
                                     "steps": _step_color,
                                     "threshold": {
                                         "line": {"color": _bar_color, "width": 4},
@@ -1068,13 +1102,13 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                         with _metrics_col:
                             # Grade badge
                             _grade_colors = {
-                                "A": ("#22c55e", "#052e16"),
-                                "B": ("#10b981", "#022c22"),
-                                "C": ("#f59e0b", "#451a03"),
-                                "D": ("#ef4444", "#450a0a"),
-                                "F": ("#dc2626", "#3b0a0a"),
+                                "A": ("#16a34a", "#f0fdf4"),
+                                "B": ("#059669", "#ecfdf5"),
+                                "C": ("#d97706", "#fef3c7"),
+                                "D": ("#dc2626", "#fef2f2"),
+                                "F": ("#b91c1c", "#fef2f2"),
                             }
-                            _gc, _gb = _grade_colors.get(_grade, ("#64748b", "#1f2937"))
+                            _gc, _gb = _grade_colors.get(_grade, ("#475569", "#f8fafc"))
                             
                             _affected_fields = len({f.field_path for f in _findings})
                             _summary_html = get_text("quality_summary_findings").format(
@@ -1082,33 +1116,33 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                 fields=f"<b style='color:#e2e8f0'>{_affected_fields}</b>",
                                 docs=f"<b style='color:#e2e8f0'>{_total_docs}</b>"
                             )
-                            _card_html = f"""<div style="background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px);">
-    <div style="display: flex; align-items: center; gap: 16px; background: {_gb}; border: 1px solid {_gc}66; border-radius: 12px; padding: 12px 20px; margin-bottom: 20px;">
+                            _card_html = f"""<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+    <div style="display: flex; align-items: center; gap: 16px; background: {_gb}; border: 1px solid {_gc}44; border-radius: 12px; padding: 12px 20px; margin-bottom: 20px;">
         <span style="font-size: 44px; font-weight: 900; color: {_gc}; line-height: 1;">{_grade}</span>
-        <div style="font-size: 13px; color: #e2e8f0; line-height: 1.4;">
+        <div style="font-size: 13px; color: #0f172a; line-height: 1.4;">
             <b style="color: {_gc}; font-size: 15px;">{get_text('quality_grade_lbl').format(grade=_grade)}</b><br>
-            <span style="color: #94a3b8;">{get_text('quality_score_sub').format(score=_score)}</span>
+            <span style="color: #64748b;">{get_text('quality_score_sub').format(score=_score)}</span>
         </div>
     </div>
     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px;">
-        <div style="background: rgba(220, 38, 38, 0.08); border: 1px solid rgba(220, 38, 38, 0.2); border-radius: 10px; padding: 12px; text-align: center;">
-            <div style="font-size: 11px; color: #fca5a5; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{get_text('quality_metric_critical')}</div>
-            <div style="font-size: 26px; font-weight: 800; color: #ef4444; margin-top: 4px;">{_crit_n}</div>
+        <div style="background: #fef2f2; border: 1px solid #fca5a5; border-radius: 10px; padding: 12px; text-align: center;">
+            <div style="font-size: 11px; color: #ef4444; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{get_text('quality_metric_critical')}</div>
+            <div style="font-size: 26px; font-weight: 800; color: #b91c1c; margin-top: 4px;">{_crit_n}</div>
         </div>
-        <div style="background: rgba(234, 88, 12, 0.08); border: 1px solid rgba(234, 88, 12, 0.2); border-radius: 10px; padding: 12px; text-align: center;">
-            <div style="font-size: 11px; color: #fdba74; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{get_text('quality_metric_high')}</div>
-            <div style="font-size: 26px; font-weight: 800; color: #ea580c; margin-top: 4px;">{_high_n}</div>
+        <div style="background: #fff7ed; border: 1px solid #fdba74; border-radius: 10px; padding: 12px; text-align: center;">
+            <div style="font-size: 11px; color: #ea580c; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{get_text('quality_metric_high')}</div>
+            <div style="font-size: 26px; font-weight: 800; color: #c2410c; margin-top: 4px;">{_high_n}</div>
         </div>
-        <div style="background: rgba(202, 138, 4, 0.08); border: 1px solid rgba(202, 138, 4, 0.2); border-radius: 10px; padding: 12px; text-align: center;">
-            <div style="font-size: 11px; color: #fde047; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{get_text('quality_metric_medium')}</div>
-            <div style="font-size: 26px; font-weight: 800; color: #ca8a04; margin-top: 4px;">{_med_n}</div>
+        <div style="background: #fefce8; border: 1px solid #fde047; border-radius: 10px; padding: 12px; text-align: center;">
+            <div style="font-size: 11px; color: #ca8a04; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{get_text('quality_metric_medium')}</div>
+            <div style="font-size: 26px; font-weight: 800; color: #a16207; margin-top: 4px;">{_med_n}</div>
         </div>
-        <div style="background: rgba(37, 99, 235, 0.08); border: 1px solid rgba(37, 99, 235, 0.2); border-radius: 10px; padding: 12px; text-align: center;">
-            <div style="font-size: 11px; color: #93c5fd; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{get_text('quality_metric_info')}</div>
-            <div style="font-size: 26px; font-weight: 800; color: #2563eb; margin-top: 4px;">{_info_n}</div>
+        <div style="background: #eff6ff; border: 1px solid #93c5fd; border-radius: 10px; padding: 12px; text-align: center;">
+            <div style="font-size: 11px; color: #2563eb; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{get_text('quality_metric_info')}</div>
+            <div style="font-size: 26px; font-weight: 800; color: #1d4ed8; margin-top: 4px;">{_info_n}</div>
         </div>
     </div>
-    <div style="font-size: 12.5px; color: #94a3b8; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 14px; margin-top: 14px; line-height: 1.4;">
+    <div style="font-size: 12.5px; color: #64748b; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 14px; margin-top: 14px; line-height: 1.4;">
         {_summary_html}
     </div>
 </div>"""
@@ -1166,10 +1200,10 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                 _df_findings = pd.DataFrame(_rows)
 
                                 _SEV_BG = {
-                                    "CRITICAL": "background-color:#3a0a0a;color:#fca5a5",
-                                    "HIGH":     "background-color:#3a1a0a;color:#fdba74",
-                                    "MEDIUM":   "background-color:#2a2a0a;color:#fde047",
-                                    "INFO":     "background-color:#0a1a3a;color:#93c5fd",
+                                    "CRITICAL": "background-color:#fef2f2;color:#dc2626",
+                                    "HIGH":     "background-color:#fff7ed;color:#ea580c",
+                                    "MEDIUM":   "background-color:#fefce8;color:#ca8a04",
+                                    "INFO":     "background-color:#eff6ff;color:#2563eb",
                                 }
 
                                 def _color_sev_row(row):
@@ -1194,10 +1228,10 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
 
                             # Expandable detail cards per finding
                             _sev_colors_q = {
-                                "CRITICAL": ("#dc2626", "#3a0a0a"),
-                                "HIGH":     ("#ea580c", "#3a1a0a"),
-                                "MEDIUM":   ("#ca8a04", "#2a2a0a"),
-                                "INFO":     ("#2563eb", "#0a1a3a"),
+                                "CRITICAL": ("#dc2626", "#fef2f2"),
+                                "HIGH":     ("#ea580c", "#fff7ed"),
+                                "MEDIUM":   ("#ca8a04", "#fefce8"),
+                                "INFO":     ("#2563eb", "#eff6ff"),
                             }
 
                             for _idx_f, _finding in enumerate(_ff):
@@ -1223,7 +1257,7 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                             padding:10px 16px;
                                             border-radius:8px;
                                             margin-bottom:12px;
-                                            color:white;
+                                            color:#0f172a;
                                         ">
                                             <b style="color:{_fg_c}">{_sev}</b>
                                             &nbsp;|&nbsp; {get_text('quality_detail_rule')}: <code style="color:{_fg_c}">{_rule}</code>
@@ -1400,11 +1434,12 @@ if st.session_state.get("analyser_clicked") and "selected_collections" in st.ses
                                     st.markdown(
                                         f"""
                                         <div style="
-                                            background:rgba(124,58,237,0.07);
-                                            border:1px solid rgba(124,58,237,0.2);
+                                            background:#ffffff;
+                                            border:1px solid #e2e8f0;
                                             border-radius:12px;
                                             padding:16px 20px;
                                             margin-bottom:16px;
+                                            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
                                         ">
                                             <div style="font-size:11px;color:#64748b;
                                                         text-transform:uppercase;

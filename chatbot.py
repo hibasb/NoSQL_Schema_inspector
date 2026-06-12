@@ -90,11 +90,11 @@ def render_chatbot(lang="English"):
         position: fixed;
         bottom: 100px; right: 28px;
         width: 370px; height: 520px;
-        background: rgba(13,11,38,0.96);
+        background: rgba(255,255,255,0.96);
         backdrop-filter: blur(28px);
-        border: 1px solid rgba(139,92,246,.35);
+        border: 1px solid rgba(226, 232, 240, 1);
         border-radius: 18px;
-        box-shadow: 0 24px 64px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.05);
+        box-shadow: 0 24px 64px rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.5);
         display: flex; flex-direction: column;
         z-index: 999998;
         overflow: hidden;
@@ -108,8 +108,8 @@ def render_chatbot(lang="English"):
       /* Header */
       #nsi-chatbot-header {{
         padding: 14px 16px;
-        background: linear-gradient(135deg,rgba(99,102,241,.22),rgba(168,85,247,.14));
-        border-bottom: 1px solid rgba(139,92,246,.2);
+        background: linear-gradient(135deg,#f8fafc,#f1f5f9);
+        border-bottom: 1px solid #e2e8f0;
         display: flex; align-items: center; gap: 10px; flex-shrink: 0;
       }}
       .nsi-avatar {{
@@ -117,12 +117,12 @@ def render_chatbot(lang="English"):
         background: linear-gradient(135deg,#6366f1,#a855f7);
         display:flex; align-items:center; justify-content:center;
         flex-shrink:0;
-        box-shadow: 0 0 10px rgba(139,92,246,.5);
+        box-shadow: 0 0 10px rgba(99,102,241,.2);
       }}
       .nsi-avatar svg {{ display:block; }}
       .nsi-hinfo {{ flex:1; }}
-      .nsi-htitle {{ font-size:14px; font-weight:700; color:#f1f5f9; margin:0; }}
-      .nsi-hsub   {{ font-size:11px; color:#818cf8; margin:0; }}
+      .nsi-htitle {{ font-size:14px; font-weight:700; color:#0f172a; margin:0; }}
+      .nsi-hsub   {{ font-size:11px; color:#64748b; margin:0; }}
       .nsi-dot {{
         width:7px; height:7px; border-radius:50%;
         background:#22c55e; box-shadow:0 0 6px #22c55e;
@@ -130,13 +130,13 @@ def render_chatbot(lang="English"):
       }}
       @keyframes nsiBlink {{ 0%,100%{{opacity:1}} 50%{{opacity:.3}} }}
       #nsi-chatbot-close {{
-        background:rgba(255,255,255,.06); border:none; border-radius:8px;
-        color:#94a3b8; cursor:pointer;
+        background:rgba(0,0,0,.04); border:none; border-radius:8px;
+        color:#64748b; cursor:pointer;
         width:28px; height:28px; font-size:16px;
         display:flex; align-items:center; justify-content:center;
         transition: background .2s, color .2s;
       }}
-      #nsi-chatbot-close:hover {{ background:rgba(239,68,68,.2); color:#f87171; }}
+      #nsi-chatbot-close:hover {{ background:rgba(239,68,68,.1); color:#ef4444; }}
 
       /* Messages */
       #nsi-chatbot-msgs {{
@@ -158,19 +158,20 @@ def render_chatbot(lang="English"):
         background:linear-gradient(135deg,#6366f1,#8b5cf6);
         color:#fff; align-self:flex-end;
         border-bottom-right-radius:4px;
-        box-shadow:0 4px 12px rgba(99,102,241,.3);
+        box-shadow:0 4px 12px rgba(99,102,241,.2);
       }}
       .nsi-bubble.bot {{
-        background:rgba(255,255,255,.06);
-        border:1px solid rgba(139,92,246,.2);
-        color:#e2e8f0; align-self:flex-start;
+        background:#ffffff;
+        border:1px solid #e2e8f0;
+        color:#0f172a; align-self:flex-start;
         border-bottom-left-radius:4px;
+        box-shadow:0 2px 6px rgba(0,0,0,.05);
       }}
       .nsi-typing {{
         display:flex; gap:4px; align-items:center;
         padding:12px 14px;
-        background:rgba(255,255,255,.05);
-        border:1px solid rgba(139,92,246,.2);
+        background:#ffffff;
+        border:1px solid #e2e8f0;
         border-radius:14px; border-bottom-left-radius:4px;
         align-self:flex-start;
       }}
@@ -188,16 +189,16 @@ def render_chatbot(lang="English"):
       /* Input area */
       #nsi-chatbot-footer {{
         padding:12px 14px;
-        border-top:1px solid rgba(139,92,246,.2);
+        border-top:1px solid #e2e8f0;
         display:flex; gap:8px; flex-shrink:0;
-        background:rgba(13,11,38,.7);
+        background:#f8fafc;
       }}
       #nsi-chatbot-input {{
         flex:1;
-        background:rgba(255,255,255,.06);
-        border:1px solid rgba(139,92,246,.3);
+        background:#ffffff;
+        border:1px solid #cbd5e1;
         border-radius:10px; padding:10px 12px;
-        color:#f1f5f9; font-size:13px;
+        color:#0f172a; font-size:13px;
         outline:none; resize:none;
         transition: border-color .2s, box-shadow .2s;
         max-height:100px;
@@ -206,7 +207,7 @@ def render_chatbot(lang="English"):
         border-color:#8b5cf6;
         box-shadow:0 0 0 3px rgba(139,92,246,.15);
       }}
-      #nsi-chatbot-input::placeholder {{ color:#475569; }}
+      #nsi-chatbot-input::placeholder {{ color:#94a3b8; }}
       #nsi-chatbot-send {{
         width:40px; height:40px; flex-shrink:0; align-self:flex-end;
         background:linear-gradient(135deg,#6366f1,#a855f7);

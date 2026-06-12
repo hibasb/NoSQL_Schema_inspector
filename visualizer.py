@@ -94,16 +94,16 @@ def build_tree_figure(schema, collection_name="collection"):
         hovertemplate="<b>%{label}</b><br>%{text}<extra></extra>",
         marker=dict(
             colors=colors,
-            line=dict(width=2, color="#0b0f1a")
+            line=dict(width=2, color="#ffffff")
         ),
         pathbar=dict(visible=True),
-        root_color="#0b0f1a"
+        root_color="#ffffff"
     ))
 
     fig.update_layout(
         margin=dict(t=30, l=10, r=10, b=10),
-        paper_bgcolor="#111827",
-        font=dict(color="white", size=15, family="monospace"),
+        paper_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#334155", size=15, family="monospace"),
         height=600
     )
 
@@ -134,7 +134,7 @@ def build_security_gauge(score: int) -> go.Figure:
                 f"{get_text('security_score_title')}<br>"
                 f"<span style='font-size:0.85em;color:{bar_color}'>{label}</span>"
             ),
-            "font": {"size": 18, "color": "white"}
+            "font": {"size": 18, "color": "#334155"}
         },
         number={
             "suffix": " / 100",
@@ -144,17 +144,17 @@ def build_security_gauge(score: int) -> go.Figure:
             "axis": {
                 "range": [0, 100],
                 "tickwidth": 1,
-                "tickcolor": "#9ca3af",
-                "tickfont": {"color": "#9ca3af"}
+                "tickcolor": "#64748b",
+                "tickfont": {"color": "#64748b"}
             },
             "bar": {"color": bar_color, "thickness": 0.25},
-            "bgcolor": "#1f2937",
+            "bgcolor": "#f1f5f9",
             "borderwidth": 2,
-            "bordercolor": "#374151",
+            "bordercolor": "#cbd5e1",
             "steps": [
-                {"range": [0,  40], "color": "#450a0a"},
-                {"range": [40, 70], "color": "#431407"},
-                {"range": [70, 100], "color": "#052e16"},
+                {"range": [0,  40], "color": "#fef2f2"},
+                {"range": [40, 70], "color": "#fff7ed"},
+                {"range": [70, 100], "color": "#f0fdf4"},
             ],
             "threshold": {
                 "line": {"color": bar_color, "width": 4},
@@ -165,8 +165,8 @@ def build_security_gauge(score: int) -> go.Figure:
     ))
 
     fig.update_layout(
-        paper_bgcolor="#111827",
-        font={"color": "white"},
+        paper_bgcolor="rgba(0,0,0,0)",
+        font={"color": "#334155"},
         height=280,
         margin=dict(t=80, b=40, l=30, r=30)
     )
