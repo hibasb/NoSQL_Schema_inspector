@@ -2,11 +2,11 @@
 
 ## Overview
 
-**NoSQL Schema Inspector** is an open-source web-based framework designed for the automatic discovery, visualization, and security auditing of document-oriented NoSQL databases.
+**NoSQL Schema Inspector** is an open-source web-based framework designed for the automatic discovery, visualization, security auditing, and continuous monitoring of document-oriented NoSQL databases.
 
-The system provides a unified environment for analyzing semi-structured data stored in databases such as MongoDB, CouchDB, and Firebase Firestore. It automatically infers hidden schemas, generates interactive structural visualizations, performs rule-based security auditing, and exports analysis reports in multiple formats.
+The system provides a unified environment for analyzing semi-structured data stored in databases such as MongoDB, CouchDB, and Firebase Firestore. It automatically infers hidden schemas, generates interactive structural visualizations, performs rule-based security auditing, evaluates data quality via semantic profiling, and exports analysis reports in multiple formats.
 
-The platform is implemented in Python using Streamlit and integrates interactive visualization libraries and AI-assisted analysis capabilities.
+Furthermore, the platform tracks database evolution by monitoring modifications in real-time and comparing snapshots to detect schema drift. It is implemented in Python using Streamlit, integrating interactive visualization libraries and AI-assisted analysis capabilities.
 
 ---
 
@@ -60,6 +60,18 @@ Analysis results can be exported in multiple formats:
 
 The generated reports summarize inferred schemas, detected vulnerabilities, and security evaluation results.
 
+### Schema Drift Detection
+
+Allows saving schema snapshots and comparing them over time to detect changes (added fields, removed fields, modified types).
+
+### Data Quality (Semantic Profiling)
+
+Evaluates the overall quality and completeness of the data, generating global wellness grades (from A to F).
+
+### Real-Time Change Monitoring
+
+Listens to database modifications live (Change Streams for MongoDB, Real-time listeners for Firestore) and updates the interface automatically.
+
 ### AI-Assisted Interpretation
 
 The framework integrates a conversational assistant powered by Groq and LLaMA 3 models to assist users in:
@@ -68,31 +80,6 @@ The framework integrates a conversational assistant powered by Groq and LLaMA 3 
 * Interpreting schema structures
 * Identifying remediation strategies
 * Explaining detected vulnerabilities
-
-### Schema Drift Detection
-
-The platform supports saving schema snapshots and comparing them over time to detect:
-
-* Schema changes (added/removed fields, modified types)
-* Common migration patterns (renamed fields, nullable field transitions)
-* Schema stability scores (from 0 to 100) based on severity metrics
-
-### Data Quality Profiling
-
-An integrated semantic profiler runs checks on document structures to:
-
-* Measure overall data quality and completeness
-* Generate semantic findings and recommendations
-* Compute structural and content wellness grades (A to F)
-
-### Real-Time Change Monitoring
-
-The application automatically listens to database changes in the background:
-
-* **MongoDB**: Change Streams (Replica Set) with a safe polling fallback
-* **Firebase Firestore**: Native real-time listeners
-* **CouchDB**: Continuous changes feed tracking
-* **UI Auto-Refresh**: Automatic cache invalidation and UI updates upon document modifications
 
 ### Multi-Database Support
 
@@ -196,10 +183,13 @@ http://localhost:8501
 1. Select the target database system from the sidebar.
 2. Provide the connection URI or authentication credentials.
 3. Connect to the database instance.
-4. Run schema analysis.
-5. Explore the inferred schema and interactive visualizations.
-6. Execute the security audit module.
-7. Export analysis reports in the desired format.
+4. Run schema analysis to discover structures.
+5. Evaluate data quality and completeness via the Semantic Profiler.
+6. Explore the inferred schema and interactive visualizations.
+7. Execute the security audit module.
+8. Monitor database modifications live with the Real-Time Change Monitor.
+9. Save schema snapshots and compare them over time to detect Schema Drift.
+10. Export analysis reports in the desired format.
 
 ---
 
@@ -219,6 +209,15 @@ NoSQL_Schema_inspector/
 │
 ├── security_auditor.py
 │   Rule-based security auditing engine
+│
+├── semantic_profiler.py
+│   Data quality and completeness evaluation
+│
+├── realtime_monitor.py
+│   Live database modifications listener
+│
+├── drift_detector.py
+│   Schema snapshots and drift comparison
 │
 ├── visualizer.py
 │   Interactive visualization generation
@@ -242,20 +241,24 @@ NoSQL_Schema_inspector/
 
 ## Screenshots
 
-### Main Interface
-
-<img width="727" height="340" alt="image" src="https://github.com/user-attachments/assets/14d81a10-757c-485a-9a4c-34742e8d4373" />
-
-
 ### Schema Visualization
 
-<img width="724" height="342" alt="image" src="https://github.com/user-attachments/assets/ad4c53df-e67d-430f-aaf7-d50b3cce1aac" />
+<img width="724" height="342" alt="image" src="images\Schema_Visualization.png" />
 
 
 ### Security Audit Dashboard
 
-<img width="727" height="343" alt="image" src="https://github.com/user-attachments/assets/57718382-7dea-4b90-8123-add8589d2f29" />
+<img width="727" height="343" alt="image" src="images\Security_Audit.png" />
 
+
+### Schema Drift
+
+<img width="727" height="343" alt="image" src="images\Schema_Drift.png" />
+
+
+### Data Quality
+
+<img width="727" height="343" alt="image" src="images\Data_Quality.png" />
 
 ---
 
@@ -271,7 +274,7 @@ If you use this framework in academic research, please cite:
 
 ```bibtex
 @article{hanine2026nosql,
-  title   = {NoSQL Schema Inspector: A Semi-Automatic Tool for Discovering, Visualizing, and Auditing Document Database Structures},
+  title   = {NoSQL Schema Inspector: An Automated Tool for Discovering, Visualizing, and Auditing Document Database Structures},
   author  = {Hanine, Mohamed and Chokri, Zahra and Sebban, Hiba and Razzouk, Majda},
   journal = {SoftwareX},
   year    = {2026}
@@ -283,9 +286,9 @@ If you use this framework in academic research, please cite:
 
 ## Authors
 
-* Majda Razzouk
-* Zahra Chokri
-* Hiba Sebban
+* Majda Razzouk - [@MajdaRAZZOUK](https://github.com/majdamija123)
+* Zahra Chokri - [@ZahraCHOKRI](https://github.com/Zahra0706)
+* Hiba Sebban - [@HibaSEBBAN](https://github.com/hibasb)
 
 National School of Applied Sciences (ENSA)
 Chouaib Doukkali University
